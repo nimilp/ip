@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.spi.http.HttpHandler;
 
 /**
  * Servlet implementation class IpServlet
@@ -35,7 +36,8 @@ public class IpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("IP: ").append(ipAddress).append("\n Last Update: ").append(lastUpdate).append("\n Ip Change At: "+ipChangedAt);
+		//response.addHeader(Http, arg1);
+		response.getWriter().append("{\"IP\":\""+ipAddress+"\", \"Last Update\": \""+lastUpdate+"\", \"Ip Change At\": \""+ipChangedAt+"\"}");
 	}
 
 	/**

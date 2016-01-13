@@ -44,7 +44,7 @@ public class IpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		if(!ipAddress.equals(request.getRemoteAddr())){
+		if(ipAddress==null || !ipAddress.equals(request.getRemoteAddr())){
 			ipChangedAt = format.format(new Date());
 		}
 		ipAddress = request.getRemoteAddr();

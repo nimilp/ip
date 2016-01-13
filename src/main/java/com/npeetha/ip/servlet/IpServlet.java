@@ -1,6 +1,9 @@
 package com.npeetha.ip.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 public class IpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String ipAddress;
+	private static String lastUpdate;
+	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS");
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
     public IpServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -27,7 +34,7 @@ public class IpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(ipAddress);
+		response.getWriter().append("IP: ").append(ipAddress).append("\n Last Update: ").append(lastUpdate);
 	}
 
 	/**
@@ -37,6 +44,14 @@ public class IpServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		ipAddress = request.getRemoteAddr();
+		lastUpdate = format.format(new Date());
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		ipAddress = null;
+		lastUpdate = null;
 	}
 
 }

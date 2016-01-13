@@ -18,6 +18,7 @@ public class IpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String ipAddress;
 	private static String lastUpdate;
+	private static String ipChangedAt;
 	
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS");
     /**
@@ -34,7 +35,7 @@ public class IpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("IP: ").append(ipAddress).append("\n Last Update: ").append(lastUpdate);
+		response.getWriter().append("IP: ").append(ipAddress).append("\n Last Update: ").append(lastUpdate).append("\n Ip Change At: "+ipChangedAt);
 	}
 
 	/**
@@ -43,6 +44,9 @@ public class IpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		if(!ipAddress.equals(request.getRemoteAddr())){
+			ipChangedAt = format.format(new Date());
+		}
 		ipAddress = request.getRemoteAddr();
 		lastUpdate = format.format(new Date());
 	}

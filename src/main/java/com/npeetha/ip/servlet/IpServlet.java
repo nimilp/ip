@@ -38,7 +38,7 @@ public class IpServlet extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
         response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
-		response.getWriter().append("{\"IP\":\""+ipAddress+"\", \"Last Update\": \""+lastUpdate+"\", \"Ip Change At\": \""+ipChangedAt+"\"}");
+		response.getWriter().append("{\"IP\":\""+ipAddress+"\", \"LastUpdate\": \""+lastUpdate+"\", \"IpChangeAt\": \""+ipChangedAt+"\"}");
 	}
 
 	/**

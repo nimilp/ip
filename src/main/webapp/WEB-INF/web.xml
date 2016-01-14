@@ -5,8 +5,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="false">
-
-         
+		<servlet>
+	        <servlet-name>Jersey</servlet-name>
+	        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+	        <init-param>
+			    <param-name>jersey.config.server.provider.packages</param-name>
+			    <param-value>
+			        com.npeetha.ip.resources
+			    </param-value>
+			</init-param>
+	    </servlet>
+        <servlet-mapping>
+	        <servlet-name>Jersey</servlet-name>
+	        <url-pattern>/myApp/*</url-pattern>
+	    </servlet-mapping>
 </web-app>
 
 <!--  curl -i -H "Accept: application/json" -H "Content-Type: application/json" http://ip-nimil.rhcloud.com/IpServlet-->

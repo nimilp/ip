@@ -21,7 +21,7 @@ public class IpServlet extends HttpServlet {
 	private static String lastUpdate;
 	private static String ipChangedAt;
 	
-	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     /**
      * @see HttpServlet#HttpServlet()
      */

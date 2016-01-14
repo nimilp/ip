@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response;
 
 import com.npeetha.mytask.resonse.IpResponse;
 
+import io.swagger.annotations.ApiOperation;
+
 @Path("whatismyip")
 public class MyIp {
 
@@ -22,11 +24,14 @@ public class MyIp {
 	
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
+	@ApiOperation(value="get my current ip stored", notes="This api is used to get the current external ip sent from my machine",
+			response=IpResponse.class)
 	@GET @Produces(MediaType.APPLICATION_JSON)
 	public Response getMyIp(){
 		return Response.ok(response).build();
 	}
 	
+	@ApiOperation(value="stores the ip of the client", notes="If you access this url, then your ip is stored")
 	@POST @Produces(MediaType.APPLICATION_JSON)
 	public Response setMyIp(@Context HttpServletRequest request){
 		

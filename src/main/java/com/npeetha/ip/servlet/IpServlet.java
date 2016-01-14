@@ -14,7 +14,7 @@ import javax.xml.ws.spi.http.HttpHandler;
 /**
  * Servlet implementation class IpServlet
  */
-@WebServlet("/IpServlet")
+@WebServlet("/whatismyip")
 public class IpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String ipAddress;
@@ -28,18 +28,16 @@ public class IpServlet extends HttpServlet {
 	
     public IpServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.addHeader(Http, arg1);
-//		response.addHeader("Access-Control-Allow-Origin", "*");
-//        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-//        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+
+		response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
 		response.getWriter().append("{\"IP\":\""+ipAddress+"\", \"Last Update\": \""+lastUpdate+"\", \"Ip Change At\": \""+ipChangedAt+"\"}");
 	}
 
@@ -47,8 +45,7 @@ public class IpServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+
 		if(ipAddress==null || !ipAddress.equals(request.getRemoteAddr())){
 			ipChangedAt = format.format(new Date());
 		}
@@ -58,7 +55,6 @@ public class IpServlet extends HttpServlet {
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		ipAddress = null;
 		lastUpdate = null;
 	}

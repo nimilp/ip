@@ -1,4 +1,4 @@
-package com.npeetha.ip.resources;
+package com.npeetha.mytask.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

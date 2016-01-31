@@ -15,11 +15,13 @@ import javax.ws.rs.core.Response;
 
 import com.npeetha.mytask.resonse.IpResponse;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Path("whatismyip")
+@Api(value="whatismyip")
 public class MyIp {
 
 	private static IpResponse response = new IpResponse();

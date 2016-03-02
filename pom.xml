@@ -36,7 +36,7 @@
 		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.2-1003-jdbc4</version>
@@ -45,7 +45,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.25</version>
-		</dependency>     
+		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -53,21 +53,27 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.glassfish.jersey.containers</groupId>
-		    <artifactId>jersey-container-servlet</artifactId>
-		    <version>2.22.1</version>
-		    <!-- <scope>provided</scope> -->
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.22.1</version>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
-		    <groupId>org.glassfish.jersey.media</groupId>
-		    <artifactId>jersey-media-moxy</artifactId>
-		    <version>2.22.1</version>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-moxy</artifactId>
+			<version>2.22.1</version>
 		</dependency>
 		<dependency>
-		  <groupId>io.swagger</groupId>
-		  <artifactId>swagger-jersey2-jaxrs</artifactId>
-		  <version>1.5.0</version>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+			<version>1.5.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.0.4</version>
+		</dependency>
+		
 	</dependencies>
 	<profiles>
 		<profile>

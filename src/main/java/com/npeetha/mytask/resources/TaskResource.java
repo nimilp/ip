@@ -14,12 +14,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Path("tasks")
-@Api(value = "tasks")
+@Api(value = "tasks", produces="application/json")
 public class TaskResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "get the list of tasks stored", notes = "This api will return every valid tasks that are not done", produces = "application/json")
+	@ApiOperation(value = "get the list of tasks stored", notes = "This api will return every valid tasks that are not done")
 	@ApiResponses(value = { @ApiResponse(code = 200, response = IpResponse.class, message = "me") })
 	public Response getTasks() {
 		return Response.ok("me").build();

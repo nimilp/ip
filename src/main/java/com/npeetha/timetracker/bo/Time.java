@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalUnit;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.bson.Document;
@@ -39,8 +40,11 @@ public class Time {
 	
 	public Document getDocument(){
 		Document doc = new Document();
-		Date expire = Date.from(this.startDate.toInstant().plus(30, ChronoUnit.DAYS));
-		doc.append(DURATION, this.getDuration()).append(END_DATE, this.getEndDate()).append(START_DATE, this.startDate).append("expireAt", expire);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(startDate);
+		calendar.add(Calendar.MONTH, 1);
+		//Date expire = Date.from(this.startDate.toInstant().plus(30, ChronoUnit.DAYS));
+		doc.append(DURATION, this.getDuration()).append(END_DATE, this.getEndDate()).append(START_DATE, this.startDate).append("expireAt", calendar.getTime());
 		return doc;
 		
 	}

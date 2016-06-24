@@ -1,14 +1,13 @@
 package com.npeetha.timetracker.bo;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalUnit;
+import static com.npeetha.timetracker.constants.MongoConstants.DURATION;
+import static com.npeetha.timetracker.constants.MongoConstants.END_DATE;
+import static com.npeetha.timetracker.constants.MongoConstants.START_DATE;
+
 import java.util.Calendar;
 import java.util.Date;
 
 import org.bson.Document;
-import static com.npeetha.timetracker.constants.MongoConstants.*;
 public class Time {
 
 	private Date startDate;

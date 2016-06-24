@@ -2,6 +2,7 @@ package com.npeetha.timetracker.constants;
 
 public class MongoConstants {
 
+	
 	public static final String USERNAME="admin";
 	public static final String PASSWORD="qfAdBcBVKUFa";
 	public static final String DB="timesheet";

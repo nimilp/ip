@@ -2,6 +2,7 @@ package com.npeetha.timetracker.hdao;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.bson.BsonDocument;
 import org.bson.Document;
@@ -22,12 +23,14 @@ import jersey.repackaged.com.google.common.collect.Lists;
  *
  */
 public class TimeTrackerHDAO {
+	private static Logger log = Logger.getLogger(TimeTrackerHDAO.class.getName());
 	private MongoClient mongoClient = null;
 	private MongoCollection<Document> collection;
 
 	private MongoDatabase getConnection() {
 		MongoCredential credential = MongoCredential.createCredential(USERNAME, DB,
 				PASSWORD.toCharArray());
+		log.info(MONGO_SERVER);
 		mongoClient = new MongoClient(new ServerAddress(MONGO_SERVER), Arrays.asList(credential));
 		return mongoClient.getDatabase(DB);
 	}

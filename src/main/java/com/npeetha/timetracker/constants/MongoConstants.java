@@ -6,7 +6,7 @@ public class MongoConstants {
 	public static final String USERNAME="admin";
 	public static final String PASSWORD="qfAdBcBVKUFa";
 	public static final String DB="timesheet";
-	public static final String MONGO_SERVER="$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT";
+	public static final String MONGO_SERVER=System.getProperty("$OPENSHIFT_MONGODB_DB_HOST")+":"+System.getProperty("$OPENSHIFT_MONGODB_DB_PORT");
 	public static final String CONNECTION = "mongodb://"+MONGO_SERVER+"/";
 	
 	public static final String DURATION = "duration";

@@ -1,8 +1,7 @@
 package com.npeetha.timetracker.bo;
 
-import static com.npeetha.timetracker.constants.MongoConstants.DURATION;
-import static com.npeetha.timetracker.constants.MongoConstants.END_DATE;
-import static com.npeetha.timetracker.constants.MongoConstants.START_DATE;
+import static com.npeetha.common.constants.MongoConstants.*;
+
 
 import java.util.Calendar;
 import java.util.Date;

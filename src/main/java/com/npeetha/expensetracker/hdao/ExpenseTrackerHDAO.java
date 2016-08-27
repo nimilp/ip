@@ -1,10 +1,14 @@
-package com.npeetha.timetracker.hdao;
+package com.npeetha.expensetracker.hdao;
+
+import static com.npeetha.common.constants.MongoConstants.DB;
+import static com.npeetha.common.constants.MongoConstants.MONGO_SERVER;
+import static com.npeetha.common.constants.MongoConstants.PASSWORD;
+import static com.npeetha.common.constants.MongoConstants.USERNAME;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.bson.BsonDocument;
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
@@ -13,8 +17,7 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.npeetha.timetracker.bo.Time;
-import static com.npeetha.common.constants.MongoConstants.*;
+import com.npeetha.expensetracker.bo.Account;
 
 import jersey.repackaged.com.google.common.collect.Lists;
 
@@ -22,8 +25,8 @@ import jersey.repackaged.com.google.common.collect.Lists;
  * @author nimilpeethambaran
  *
  */
-public class TimeTrackerHDAO {
-	private static Logger log = Logger.getLogger(TimeTrackerHDAO.class.getName());
+public class ExpenseTrackerHDAO {
+	private static Logger log = Logger.getLogger(ExpenseTrackerHDAO.class.getName());
 	private MongoClient mongoClient = null;
 	private MongoCollection<Document> collection;
 
@@ -38,17 +41,17 @@ public class TimeTrackerHDAO {
 	/**
 	 * @return
 	 */
-	public List<Time> getTimesheets(){
+	public List<Account> getAccounts(){
 		
 		MongoDatabase db= getConnection();
-		collection = db.getCollection("timesheets");
+		collection = db.getCollection("accounts");
 		FindIterable<Document> find = collection.find();
-		List<Time> returnList = Lists.newArrayList();
-		for(Document doc : find){
-			Time time = new Time();
-			time.setDuration(doc.getInteger(DURATION)).setEndDate(doc.getDate(END_DATE)).setStartDate(doc.getDate(START_DATE));
-			returnList.add(time);
-		}
+		List<Account> returnList = Lists.newArrayList();
+//		for(Document doc : find){
+//			Account account = new Account();
+//			time.setDuration(doc.getInteger(DURATION)).setEndDate(doc.getDate(END_DATE)).setStartDate(doc.getDate(START_DATE));
+//			returnList.add(time);
+//		}
 		mongoClient.close();
 		return returnList;
 	}
@@ -56,14 +59,13 @@ public class TimeTrackerHDAO {
 	/**
 	 * @param time
 	 */
-	public void insertTimeSheet(Time time){
+	public void insertAccounts(Account account){
 		MongoDatabase db = getConnection();
-		collection = db.getCollection("timesheets");
+		collection = db.getCollection("accounts");
 		if(collection==null){
-			db.createCollection("timesheet");
-			collection = db.getCollection("timesheets");
+			db.createCollection("accounts");
+			collection = db.getCollection("accounts");
 		}
-		collection.insertOne(time.getDocument());
-		collection.createIndex(new Document(START_DATE,1).append(END_DATE, 1));
+		collection.insertOne(account.getDocument());
 	}
 }

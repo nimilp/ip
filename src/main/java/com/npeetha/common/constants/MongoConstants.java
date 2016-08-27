@@ -1,4 +1,4 @@
-package com.npeetha.timetracker.constants;
+package com.npeetha.common.constants;
 
 public class MongoConstants {
 
@@ -12,4 +12,10 @@ public class MongoConstants {
 	public static final String DURATION = "duration";
 	public static final String START_DATE ="start_date";
 	public static final String END_DATE = "end_date";
+	
+	public enum AccountsConstants{
+		id,name,desc,budget;
+	}
+	
+//	public enum AccountIndex {
 }

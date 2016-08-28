@@ -1,21 +1,23 @@
 package com.npeetha.expensetracker.bo;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
-import com.mongodb.util.JSON;
 import com.npeetha.common.constants.MongoConstants.AccountsConstants;
 public class Account {
 
-	private Integer id;
+	
+	private String id;
 	private String name;
-	private String desc;
+	private String description;
 	private Double budget;
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public Account setId(String id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getName() {
@@ -27,12 +29,12 @@ public class Account {
 		return this;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public Account setDesc(String desc) {
-		this.desc = desc;
+	public Account setDescription(String desc) {
+		this.description = desc;
 		return this;
 	}
 
@@ -49,14 +51,14 @@ public class Account {
 		Document doc = new Document();
 		
 		//Date expire = Date.from(this.startDate.toInstant().plus(30, ChronoUnit.DAYS));
-		doc.append(AccountsConstants.id.toString(), this.id).append(AccountsConstants.name.toString(), this.name).append(AccountsConstants.desc.toString(), this.desc).append(AccountsConstants.budget.toString(), this.budget);
+		doc.append(AccountsConstants.id.toString(), this.id).append(AccountsConstants.name.toString(), this.name).append(AccountsConstants.description.toString(), this.description).append(AccountsConstants.budget.toString(), this.budget);
 		return doc;
 		
 	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return JSON.serialize(this);
+		return new String("{id:"+id+", desc:"+description+", budget:"+budget+"}");
 		//return super.toString();
 	}
 	

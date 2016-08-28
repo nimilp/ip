@@ -14,7 +14,7 @@ public class MongoConstants {
 	public static final String END_DATE = "end_date";
 	
 	public enum AccountsConstants{
-		id,name,desc,budget;
+		id,name,description,budget,_id;
 	}
 	
 //	public enum AccountIndex {

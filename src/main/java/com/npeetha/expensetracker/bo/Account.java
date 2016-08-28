@@ -2,6 +2,7 @@ package com.npeetha.expensetracker.bo;
 
 import org.bson.Document;
 
+import com.mongodb.util.JSON;
 import com.npeetha.common.constants.MongoConstants.AccountsConstants;
 public class Account {
 
@@ -51,6 +52,12 @@ public class Account {
 		doc.append(AccountsConstants.id.toString(), this.id).append(AccountsConstants.name.toString(), this.name).append(AccountsConstants.desc.toString(), this.desc).append(AccountsConstants.budget.toString(), this.budget);
 		return doc;
 		
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return JSON.serialize(this);
+		//return super.toString();
 	}
 	
 }

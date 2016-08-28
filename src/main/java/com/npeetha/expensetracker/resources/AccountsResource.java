@@ -33,6 +33,7 @@ public class AccountsResource {
 		if(hdao==null){
 			hdao= new ExpenseTrackerHDAO();
 		}
+		
 		hdao.insertAccounts(account);
 	}
 }

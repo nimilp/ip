@@ -66,7 +66,7 @@ public class ExpenseTrackerHDAO {
 			db.createCollection("accounts");
 			collection = db.getCollection("accounts");
 		}
-		log.info("received account "+account.toString() );
+		System.out.println("received account "+account.toString() );
 		collection.insertOne(account.getDocument());
 	}
 }

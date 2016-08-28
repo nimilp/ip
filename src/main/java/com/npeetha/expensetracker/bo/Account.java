@@ -51,7 +51,7 @@ public class Account {
 		Document doc = new Document();
 		
 		//Date expire = Date.from(this.startDate.toInstant().plus(30, ChronoUnit.DAYS));
-		doc.append(AccountsConstants.id.toString(), this.id).append(AccountsConstants.name.toString(), this.name).append(AccountsConstants.description.toString(), this.description).append(AccountsConstants.budget.toString(), this.budget);
+		doc.append(AccountsConstants.name.toString(), this.name).append(AccountsConstants.description.toString(), this.description).append(AccountsConstants.budget.toString(), this.budget);
 		return doc;
 		
 	}

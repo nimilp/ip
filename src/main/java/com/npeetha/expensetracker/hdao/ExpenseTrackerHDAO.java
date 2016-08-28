@@ -65,7 +65,7 @@ public class ExpenseTrackerHDAO {
 		MongoDatabase db = getConnection();
 		Account account = null;
 		collection = db.getCollection("accounts");
-		Document doc1 = new Document("_id",id);
+		Document doc1 = new Document("_id",new ObjectId(id));
 		FindIterable<Document> find = collection.find(doc1);
 		List<Account> returnList = Lists.newArrayList();
 		for (Document doc : find) {
@@ -97,7 +97,7 @@ public class ExpenseTrackerHDAO {
 	public void deleteAccount(String id){
 		MongoDatabase db = getConnection();
 		collection = db.getCollection("accounts");
-		Document doc = new Document("_id",id);
+		Document doc = new Document("_id",new ObjectId(id));
 		//bson.
 		collection.deleteOne(doc);
 	}
@@ -105,8 +105,9 @@ public class ExpenseTrackerHDAO {
 	public void updateAccount(Account account){
 		MongoDatabase db = getConnection();
 		collection = db.getCollection("accounts");
-		Document doc = new Document("_id",account.getId());
+		Document doc = new Document("_id",new ObjectId(account.getId()));
+		Document updateDoc = new Document("$set",account.getDocument());
 		//bson.
-		collection.updateOne(doc, account.getDocument());
+		collection.updateOne(doc, updateDoc);
 	}
 }

@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ip</groupId>
 	<artifactId>ip</artifactId>
-	<packaging>war</packaging>
-	<version>1.0</version>
+	<packaging>pom</packaging>
+	<version>2.0</version>
 	<name>ip</name>
 	<repositories>
 		<repository>
@@ -100,4 +100,13 @@
 			</build>
 		</profile>
 	</profiles>
+	<modules>
+		<module>common</module>
+		<module>expense-calculator</module>
+		
+		<module>ipfetch</module>
+		<module>mytasks</module>
+		<module>timetracker</module>
+		<module>ip-web</module>
+	</modules>
 </project>

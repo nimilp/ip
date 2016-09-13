@@ -1,4 +1,4 @@
-package com.npeetha.mytask.resources;
+package com.npeetha.ipfetch.resources;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

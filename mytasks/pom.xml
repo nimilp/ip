@@ -9,4 +9,5 @@
 		<version>2.0</version>
 	</parent>
 	<artifactId>mytasks</artifactId>
+	<version>${mytasks.version}</version>
 </project>

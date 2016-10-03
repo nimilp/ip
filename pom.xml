@@ -34,6 +34,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		<common.version>2.0</common.version>
+		<expense.tracker.version>2.0</expense.tracker.version>
+		<ipfetch.version>2.0</ipfetch.version>
+		<mytasks.version>2.0</mytasks.version>
+		<timetracker.version>2.0</timetracker.version>
+		<web-version>2.0</web-version>
 	</properties>
 	<dependencies>
 		<!-- <dependency>

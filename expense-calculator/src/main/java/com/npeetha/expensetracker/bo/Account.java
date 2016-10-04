@@ -1,19 +1,53 @@
 package com.npeetha.expensetracker.bo;
 
+import java.util.Date;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import com.npeetha.common.constants.MongoConstants.AccountsConstants;
+
+@Entity
+@Table(name="accounts")
 public class Account {
 
+	@Id
+	@Column(name="auto_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int autoId;
 	
 	private String id;
 	private String name;
 	private String description;
+	
+	@Column(name="creation_date")
+	private Date creationDate;
+	
+	@Column(name="updation_date")
+	private Date updateDate;
+	
+	@Column(name="last_updated_by")
+	private String lastUpdatedBy;
+	
 	private Double budget;
 	
+	
+	public int getAutoId() {
+		return autoId;
+	}
+	public Account setAutoId(int autoId) {
+		this.autoId = autoId;
+		return this;
+	}
 	public String getId() {
-		return id;
+		return id == null? UUID.randomUUID().toString():id;
 	}
 	public Account setId(String id) {
 		this.id = id;
@@ -58,8 +92,29 @@ public class Account {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return new String("{id:"+id+", desc:"+description+", budget:"+budget+"}");
+		return new String("{id:"+id+", name:"+name+", desc:"+description+", budget:"+budget+", lastUpdatedBy:"+lastUpdatedBy+", _id:"+autoId+"}");
 		//return super.toString();
+	}
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public Account setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+		return this;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public Account setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+		return this;
+	}
+	public String getLastUpdatedBy() {
+		return lastUpdatedBy;
+	}
+	public Account setLastUpdatedBy(String lastUpdatedBy) {
+		this.lastUpdatedBy = lastUpdatedBy;
+		return this;
 	}
 	
 }

@@ -3,12 +3,15 @@ package com.npeetha.expensetracker.resources;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.npeetha.expensetracker.bo.Account;
 import com.npeetha.expensetracker.managers.IAccountManager;
@@ -29,42 +32,42 @@ public class AccountsResource {
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)
 //	@Path("/{id}")
-//	public Account getAccount(@PathParam(value = "id") String id) {
-//		
-//		return manager.getAccount(id);
-//	}
+	@RequestMapping(value="/accounts/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
+	public Account getAccount(@PathVariable String id) {
+		
+		return manager.getAccount(id);
+	}
 //
-//	@POST
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	// @Produces(MediaType.APPLICATION_JSON)
-//	public Response insertTimes(Account account) {
+	@RequestMapping(value="/accounts", method=RequestMethod.POST)
+	public String insertTimes(@RequestBody Account account) {
 //		Response response = null;
-//		try {
-//
-//			manager.createAccount(account);
-//			response = Response.status(Status.CREATED).entity("{\"success\":\"true\"}").build();
-//		} catch (Exception e) {
-//			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-//		}
-//		return response;
-//	}
+		try {
+
+			manager.createAccount(account);
+			return  "{\"success\":\"true\"}";
+		} catch (Exception e) {
+			return  Status.INTERNAL_SERVER_ERROR.toString();
+		}
+		//return response;
+	}
 //
 //	@DELETE
-//	@Path("/{id}")
-//	public void delete(@PathParam(value = "id") String id) {
-//		
-//		manager.deleteAccount(id);
-//	}
+	@RequestMapping(value="/accounts/{id}",method=RequestMethod.DELETE)
+	public @ResponseBody void delete(@PathVariable String id) {
+		
+		manager.deleteAccount(id);
+	}
 //
 //	@PUT
-//	public Response update(Account account) {
-//		Response response = null;
-//		try {
-//			manager.updateAccount(account);
-//			response = Response.status(Status.OK).entity("{\"success\":\"true\"}").build();
-//		} catch (Exception e) {
-//			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-//		}
-//		return response;
-//	}
+	@RequestMapping(value="/accounts", method=RequestMethod.PUT)
+	public String update(@RequestBody Account account) {
+		
+		try {
+			manager.updateAccount(account);
+			return "{\"success\":\"true\"}";
+		} catch (Exception e) {
+			return Status.INTERNAL_SERVER_ERROR.toString();
+		}
+		
+	}
 }

@@ -2,6 +2,7 @@ package com.npeetha.expensetracker.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.hibernate.Session;
@@ -25,6 +26,7 @@ public class AccountDAO implements IAccountDAO {
 
 //	@Override
 	public String save(Account account) {
+		account.setId(UUID.randomUUID().toString());
 		Session session = sessionFactory.openSession();
 		Serializable save = session.save(account);	
 		return save.toString();
@@ -59,7 +61,8 @@ public class AccountDAO implements IAccountDAO {
 	public String delete(String id) {
 		
 		Session session = sessionFactory.openSession();
-		session.delete(get(id));
+		Account account = get(id);
+		session.delete(account);
 		session.flush();
 		return id;
 	}

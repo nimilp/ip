@@ -47,7 +47,8 @@ public class Account {
 		return this;
 	}
 	public String getId() {
-		return id == null? UUID.randomUUID().toString():id;
+		//id= id == null || id.trim().length()==0? UUID.randomUUID().toString():id;
+		return id;
 	}
 	public Account setId(String id) {
 		this.id = id;

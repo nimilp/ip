@@ -25,14 +25,14 @@ public class AccountDAO implements IAccountDAO {
 
     
 
-	@Override
+//	@Override
 	public String save(Account account) {
 		Session session = sessionFactory.openSession();
 		Serializable save = session.save(account);	
 		return save.toString();
 	}
 
-	@Override
+//	@Override
 	
 	public List<Account> list() {
 		Session session = sessionFactory.openSession();
@@ -41,7 +41,7 @@ public class AccountDAO implements IAccountDAO {
 		return accountList;
 	}
 
-	@Override
+//	@Override
 	public Account get(String id) {
 		Account account = new Account();
 		account.setId(id);
@@ -49,7 +49,7 @@ public class AccountDAO implements IAccountDAO {
 		return (Account) session.createCriteria(Account.class).add(Example.create(account)).uniqueResult();
 	}
 
-	@Override
+//	@Override
 	public String update(Account account) {
 		Session session = sessionFactory.openSession();
 		session.update(account);
@@ -57,7 +57,7 @@ public class AccountDAO implements IAccountDAO {
 		return account.getId();
 	}
 
-	@Override
+//	@Override
 	public String delete(String id) {
 		
 		Session session = sessionFactory.openSession();

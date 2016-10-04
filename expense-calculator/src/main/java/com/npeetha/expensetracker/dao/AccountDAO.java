@@ -23,8 +23,6 @@ public class AccountDAO implements IAccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-    
-
 //	@Override
 	public String save(Account account) {
 		Session session = sessionFactory.openSession();

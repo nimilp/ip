@@ -1,22 +1,24 @@
 package com.npeetha.timetracker.hdao;
 
+import static com.npeetha.common.constants.MongoConstants.DB;
+import static com.npeetha.common.constants.MongoConstants.END_DATE;
+import static com.npeetha.common.constants.MongoConstants.MONGO_SERVER;
+import static com.npeetha.common.constants.MongoConstants.PASSWORD;
+import static com.npeetha.common.constants.MongoConstants.START_DATE;
+import static com.npeetha.common.constants.MongoConstants.USERNAME;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.bson.BsonDocument;
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.npeetha.timetracker.bo.Time;
-import static com.npeetha.common.constants.MongoConstants.*;
-
-import jersey.repackaged.com.google.common.collect.Lists;
 
 /**
  * @author nimilpeethambaran
@@ -38,20 +40,20 @@ public class TimeTrackerHDAO {
 	/**
 	 * @return
 	 */
-	public List<Time> getTimesheets(){
-		
-		MongoDatabase db= getConnection();
-		collection = db.getCollection("timesheets");
-		FindIterable<Document> find = collection.find();
-		List<Time> returnList = Lists.newArrayList();
-		for(Document doc : find){
-			Time time = new Time();
-			time.setDuration(doc.getInteger(DURATION)).setEndDate(doc.getDate(END_DATE)).setStartDate(doc.getDate(START_DATE));
-			returnList.add(time);
-		}
-		mongoClient.close();
-		return returnList;
-	}
+//	public List<Time> getTimesheets(){
+//		
+////		MongoDatabase db= getConnection();
+////		collection = db.getCollection("timesheets");
+////		FindIterable<Document> find = collection.find();
+////		List<Time> returnList = Lists.newArrayList();
+////		for(Document doc : find){
+////			Time time = new Time();
+////			time.setDuration(doc.getInteger(DURATION)).setEndDate(doc.getDate(END_DATE)).setStartDate(doc.getDate(START_DATE));
+////			returnList.add(time);
+////		}
+////		mongoClient.close();
+////		return returnList;
+//	}
 	
 	/**
 	 * @param time

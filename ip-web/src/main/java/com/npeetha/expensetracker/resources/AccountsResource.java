@@ -46,7 +46,7 @@ public class AccountsResource {
 			manager.createAccount(account);
 			return  "{\"success\":\"true\"}";
 		} catch (Exception e) {
-			return  Status.INTERNAL_SERVER_ERROR.toString();
+			return  "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
 		}
 		//return response;
 	}
@@ -66,7 +66,8 @@ public class AccountsResource {
 			manager.updateAccount(account);
 			return "{\"success\":\"true\"}";
 		} catch (Exception e) {
-			return Status.INTERNAL_SERVER_ERROR.toString();
+			e.printStackTrace();
+			return "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
 		}
 		
 	}

@@ -15,12 +15,17 @@
 	<context:component-scan base-package="com.npeetha.expensetracker.dao" />
 	<context:component-scan base-package="com.npeetha.expensetracker.resources" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://#{systemEnvironment['OPENSHIFT_MYSQL_DB_HOST']}:#{systemEnvironment['OPENSHIFT_MYSQL_DB_PORT']}/ip" />
-		<property name="username" value="adminq2aQXEz" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://#{systemEnvironment['OPENSHIFT_MYSQL_DB_HOST']}:#{systemEnvironment['OPENSHIFT_MYSQL_DB_PORT']}/ip" />
+		<property name="user" value="adminq2aQXEz" />
 		<property name="password" value="Gu64GdXB438D" />
+		<!-- these are C3P0 properties -->
+        <property name="acquireIncrement" value="3" />
+        <property name="minPoolSize" value="3" />
+        <property name="maxPoolSize" value="6" />
+        <!-- <property name="maxIdleTime" value="${maxIdleTime}" /> -->
 	</bean>
 
 	<bean id="sessionFactory"
@@ -29,7 +34,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 			</props>
 		</property>
 		<property name="packagesToScan" value="com.npeetha.expensetracker.bo" />

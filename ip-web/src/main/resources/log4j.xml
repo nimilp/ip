@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="ROLL" class="org.apache.log4j.rolling.RollingFileAppender">
+		<!-- The active file to log to -->
+		<param name="file" value="logs/application.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<!-- The file to roll to, this is a fairly intelligent parameter, if the 
+				file ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
+				default is yyyy-MM-dd, (rolls at midnight) See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+			<param name="FileNamePattern" value="logs/myportal/portal.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The log message pattern -->
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="hibernate" class="org.apache.log4j.rolling.RollingFileAppender">
+		<!-- The active file to log to -->
+		<param name="file" value="logs/hibernate.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<!-- The file to roll to, this is a fairly intelligent parameter, if the 
+				file ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
+				default is yyyy-MM-dd, (rolls at midnight) See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+			<param name="FileNamePattern" value="logs/myportal/portal.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The log message pattern -->
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<logger name="com.npeetha"
+		additivity="false">
+		<level value="error" />
+		<appender-ref ref="ROLL" />
+	</logger>
+	<logger name="org.hibernate"
+		additivity="false">
+		<level value="debug" />
+		<appender-ref ref="ROLL" />
+	</logger>
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="ROLL" />
+	</root>
+
+</log4j:configuration>

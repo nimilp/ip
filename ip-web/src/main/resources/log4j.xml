@@ -48,7 +48,7 @@
 	<logger name="org.hibernate"
 		additivity="false">
 		<level value="debug" />
-		<appender-ref ref="ROLL" />
+		<appender-ref ref="hibernate" />
 	</logger>
 	<root>
 		<priority value="debug" />

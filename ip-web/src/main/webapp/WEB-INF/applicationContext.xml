@@ -24,8 +24,11 @@
 		<!-- these are C3P0 properties -->
         <property name="acquireIncrement" value="3" />
         <property name="minPoolSize" value="3" />
-        <property name="maxPoolSize" value="6" />
+        <property name="maxPoolSize" value="50" />
         <!-- <property name="maxIdleTime" value="${maxIdleTime}" /> -->
+        <property name="autoCommitOnClose"><value>false</value></property> 
+        <!-- Otras configuraciones  -->
+        <property name="numHelperThreads"><value>5</value></property>
 	</bean>
 
 	<bean id="sessionFactory"

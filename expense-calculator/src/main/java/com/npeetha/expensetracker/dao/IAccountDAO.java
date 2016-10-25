@@ -2,14 +2,14 @@ package com.npeetha.expensetracker.dao;
 
 import java.util.List;
 
-import com.npeetha.expensetracker.bo.Account;
+import com.npeetha.expensetracker.entity.AccountEntity;
 
 public interface IAccountDAO {
 
-	String save(Account account);
-	List<Account> list();
-	Account get(String id);
-	String update(Account account);
+	String save(AccountEntity account);
+	List<AccountEntity> list();
+	AccountEntity get(String id);
+	String update(AccountEntity account);
 	String delete(String id);
 	
 }

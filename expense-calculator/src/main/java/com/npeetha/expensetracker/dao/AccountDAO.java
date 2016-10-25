@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.npeetha.expensetracker.bo.Account;
+import com.npeetha.expensetracker.entity.AccountEntity;
 
 /**
  * @author nimilpeethambaran
@@ -25,7 +26,7 @@ public class AccountDAO implements IAccountDAO {
 	private SessionFactory sessionFactory;
 
 //	@Override
-	public String save(Account account) {
+	public String save(AccountEntity account) {
 		account.setId(UUID.randomUUID().toString());
 		Session session = sessionFactory.openSession();
 		Serializable save = session.save(account);	
@@ -34,23 +35,23 @@ public class AccountDAO implements IAccountDAO {
 
 //	@Override
 	
-	public List<Account> list() {
+	public List<AccountEntity> list() {
 		Session session = sessionFactory.openSession();
-		List<Account> accountList = session.createQuery("from Account").list();
+		List<AccountEntity> accountList = session.createQuery("from AccountEntity").list();
 		session.flush();
 		return accountList;
 	}
 
 //	@Override
-	public Account get(String id) {
+	public AccountEntity get(String id) {
 		Account account = new Account();
 		account.setId(id);
 		Session session = sessionFactory.openSession();
-		return (Account) session.createCriteria(Account.class).add(Example.create(account)).uniqueResult();
+		return (AccountEntity) session.createCriteria(Account.class).add(Example.create(account)).uniqueResult();
 	}
 
 //	@Override
-	public String update(Account account) {
+	public String update(AccountEntity account) {
 		Session session = sessionFactory.openSession();
 		session.update(account);
 		session.flush();
@@ -61,7 +62,7 @@ public class AccountDAO implements IAccountDAO {
 	public String delete(String id) {
 		
 		Session session = sessionFactory.openSession();
-		Account account = get(id);
+		AccountEntity account = get(id);
 		session.delete(account);
 		session.flush();
 		return id;

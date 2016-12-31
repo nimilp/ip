@@ -44,10 +44,10 @@ public class AccountDAO implements IAccountDAO {
 
 //	@Override
 	public AccountEntity get(String id) {
-		Account account = new Account();
+		AccountEntity account = new AccountEntity();
 		account.setId(id);
 		Session session = sessionFactory.openSession();
-		return (AccountEntity) session.createCriteria(Account.class).add(Example.create(account)).uniqueResult();
+		return (AccountEntity) session.createCriteria(AccountEntity.class).add(Example.create(account)).uniqueResult();
 	}
 
 //	@Override

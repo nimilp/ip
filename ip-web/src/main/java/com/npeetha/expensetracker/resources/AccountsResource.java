@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.npeetha.expensetracker.bo.Account;
 import com.npeetha.expensetracker.managers.IAccountManager;
@@ -23,19 +24,20 @@ public class AccountsResource {
 	IAccountManager manager;
 //	ExpenseTrackerHDAO hdao;
 
-	@RequestMapping(value="/accounts",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON)
-	public List<Account> getAccounts() {
-		
-		return manager.getAccounts();
+	@RequestMapping(value="/accounts",method=RequestMethod.GET)
+	public ModelAndView getAccounts() {
+		ModelAndView modelAndView = new ModelAndView("accounts");
+		modelAndView.getModel().put("accounts", manager.getAccounts());
+		return modelAndView;
 	}
 
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)
 //	@Path("/{id}")
 	@RequestMapping(value="/accounts/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
-	public Account getAccount(@PathVariable String id) {
-		
-		return manager.getAccount(id);
+	public ModelAndView getAccount(@PathVariable String id) {
+		return new ModelAndView("accounts", "accounts", manager.getAccounts());
+//		return manager.getAccount(id);
 	}
 //
 	@RequestMapping(value="/accounts", method=RequestMethod.POST)

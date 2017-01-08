@@ -8,5 +8,8 @@
     	<put-attribute name="title" value="Accounts"/>
         <put-attribute name="content" value="/WEB-INF/jsp/accounts.jsp"/>
     </definition>
-
+	<definition name="expenses" extends="defaultTemplate">
+    	<put-attribute name="title" value="Accounts"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/expenses.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -1,10 +1,15 @@
 package com.npeetha.expensetracker.resources;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.npeetha.expensetracker.bo.Account;
 import com.npeetha.expensetracker.managers.IAccountManager;
 
@@ -25,24 +32,30 @@ public class AccountsResource {
 //	ExpenseTrackerHDAO hdao;
 
 	@RequestMapping(value="/accounts",method=RequestMethod.GET)
-	public ModelAndView getAccounts() {
-		ModelAndView modelAndView = new ModelAndView("accounts");
-		modelAndView.getModel().put("accounts", manager.getAccounts());
-		return modelAndView;
+	public ModelAndView getAccounts() throws JsonProcessingException {
+		
+		return new ModelAndView("accounts", "accounts", new ObjectMapper().writeValueAsString(manager.getAccounts()));
 	}
 
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)
 //	@Path("/{id}")
 	@RequestMapping(value="/accounts/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
-	public ModelAndView getAccount(@PathVariable String id) {
-		return new ModelAndView("accounts", "accounts", manager.getAccounts());
-//		return manager.getAccount(id);
+	public ModelAndView getAccount(@PathVariable String id) throws JsonProcessingException {
+		
+		String s = new ObjectMapper().writeValueAsString(manager.getAccounts());
+		System.out.println(s);
+		try {
+			new ObjectMapper().writeValue(System.out, manager.getAccounts());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ModelAndView("accounts", "accounts", new ObjectMapper().writeValueAsString(manager.getAccounts()));
 	}
-//
+
 	@RequestMapping(value="/accounts", method=RequestMethod.POST)
 	public String insertTimes(@RequestBody Account account) {
-//		Response response = null;
 		try {
 
 			manager.createAccount(account);
@@ -50,7 +63,6 @@ public class AccountsResource {
 		} catch (Exception e) {
 			return  "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
 		}
-		//return response;
 	}
 //
 //	@DELETE
@@ -72,5 +84,18 @@ public class AccountsResource {
 			return "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
 		}
 		
+	}
+	
+	@RequestMapping(value="/generate")
+	public String generate(){
+		for(int i =0;i<50;i++){
+			Account account = new Account();
+			account.setBudget(new Random().nextDouble());
+			account.setDescription(RandomStringUtils.randomAlphabetic(20));
+			account.setName("account"+i);
+			String s =manager.createAccount(account);
+			System.out.print("at "+i+", with "+s);
+		}
+		return "";
 	}
 }

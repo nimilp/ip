@@ -1,0 +1,64 @@
+package com.npeetha.expensetracker.bo;
+
+import java.util.Date;
+
+public class Expense {
+
+	private int autoId;
+	private String id;
+	private double amount;
+	private String venue;
+	private String item;
+	private Date paidOn;
+	private String accountId;
+	public double getAmount() {
+		return amount;
+	}
+	public Expense setAmount(double amount) {
+		this.amount = amount;
+		return this;
+	}
+	public String getVenue() {
+		return venue;
+	}
+	public Expense setVenue(String venue) {
+		this.venue = venue;
+		return this;
+	}
+	public String getItem() {
+		return item;
+	}
+	public Expense setItem(String item) {
+		this.item = item;
+		return this;
+	}
+	public Date getPaidOn() {
+		return paidOn;
+	}
+	public Expense setPaidOn(Date paidOn) {
+		this.paidOn = paidOn;
+		return this;
+	}
+	public String getAccountId() {
+		return accountId;
+	}
+	public Expense setAccountId(String accountId) {
+		this.accountId = accountId;
+		return this;
+	}
+	public int getAutoId() {
+		return autoId;
+	}
+	public Expense setAutoId(int autoId) {
+		this.autoId = autoId;
+		return this;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
+}

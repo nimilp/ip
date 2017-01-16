@@ -26,18 +26,26 @@ public class ExpenseDAO implements IExpenseDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	private Session getSession(){
+		Session session = sessionFactory.getCurrentSession();
+		if(session == null){
+			session = sessionFactory.openSession();
+		}
+		return session;
+	}
 //	@Override
 	public String save(ExpenseEntity expense) {
 		expense.setId(UUID.randomUUID().toString());
-		Session session = sessionFactory.openSession();
-		Serializable save = session.save(expense);	
-		return save.toString();
+		Session session = getSession();
+//		Serializable save = 
+		session.saveOrUpdate(expense);	
+		return expense.getId();//.toString();
 	}
 
 //	@Override
 	
 	public List<ExpenseEntity> list() {
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		List<ExpenseEntity> expenseList = session.createQuery("from ExpenseEntity").list();
 		session.flush();
 		return expenseList;
@@ -47,13 +55,13 @@ public class ExpenseDAO implements IExpenseDAO {
 	public ExpenseEntity get(String id) {
 		ExpenseEntity expense = new ExpenseEntity();
 		expense.setId(id);
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		return (ExpenseEntity) session.createCriteria(ExpenseEntity.class).add(Example.create(expense)).uniqueResult();
 	}
 
 //	@Override
 	public String update(ExpenseEntity expense) {
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		session.update(expense);
 		session.flush();
 		return expense.getId();

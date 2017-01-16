@@ -1,12 +1,16 @@
 package com.npeetha.expensetracker.entity;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.npeetha.expensetracker.bo.Account;
@@ -22,6 +26,9 @@ public class AccountEntity {
 	private String id;
 	private String name;
 	private String description;
+	
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="accountId")
+//	private Set<ExpenseEntity> expenses;
 	
 	@Column(name = "creation_date")
 	private Date creationDate;
@@ -90,6 +97,8 @@ public class AccountEntity {
 		return this;
 	}
 	
+	
+	
 	public AccountEntity copy(Account entity) {
 		//AccountEntity a = new AccountEntity();
 		AccountEntity a = this;
@@ -109,5 +118,12 @@ public class AccountEntity {
 				.setName(a.getName()).setUpdateDate(a.getUpdateDate());
 		return e;
 	}
+	
+//	public Set<ExpenseEntity> getExpenses() {
+//		return expenses;
+//	}
+//	public void setExpenses(Set<ExpenseEntity> expenses) {
+//		this.expenses = expenses;
+//	}
 	
 }

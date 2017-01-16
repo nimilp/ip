@@ -11,6 +11,9 @@ public class Expense {
 	private String item;
 	private Date paidOn;
 	private String accountId;
+	private String accountName;
+	
+	
 	public double getAmount() {
 		return amount;
 	}
@@ -56,8 +59,17 @@ public class Expense {
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public Expense setId(String id) {
 		this.id = id;
+		return this;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public Expense setAccountName(String accountName) {
+		this.accountName = accountName;
+		return this;
+		
 	}
 	
 	

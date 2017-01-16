@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -16,8 +16,8 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<!--<li class="active"><a href="#">Account <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">What is my ip?</a></li>-->
+				<li class="active"><a href="#">Account <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">What is my ip?</a></li>
 
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -26,14 +26,14 @@
 					<ul class="dropdown-menu">
 						<li><a href="/myapps/expenses">Expense List</a></li>
 						<li><a href="#">New Expense</a></li>
-						<!-- <li><a href="#">New Expense</a></li> -->
+						<li><a href="#">New Expense</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="/myapps/accounts">Account List</a></li>
 						<li><a href="#">New Account</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<!-- <li><a href="#">Link</a></li> -->
+				<li><a href="#">Link</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Options <span class="caret"></span></a>

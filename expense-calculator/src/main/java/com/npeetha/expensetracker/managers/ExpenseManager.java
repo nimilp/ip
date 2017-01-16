@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.npeetha.expensetracker.bo.Expense;
+import com.npeetha.expensetracker.dao.IAccountDAO;
 import com.npeetha.expensetracker.dao.IExpenseDAO;
 import com.npeetha.expensetracker.entity.ExpenseEntity;
 
@@ -17,14 +18,18 @@ public class ExpenseManager implements IExpenseManager {
 	@Autowired
 	IExpenseDAO dao;
 	
+	@Autowired
+	IAccountDAO accountDao;
+	
 	@Override
 	@Transactional
 	public List<Expense> list() {
 		List<ExpenseEntity> list =dao.list();
 		List<Expense> expenseList = new ArrayList<Expense>(list.size());
 		for(ExpenseEntity entity : list){
-			expenseList.add(entity.transfer());
-			
+			Expense ex = entity.transfer();
+			ex.setAccountName(accountDao.get(entity.getAccountId()).getName());
+			expenseList.add(ex);
 		}
 		return expenseList;
 	}

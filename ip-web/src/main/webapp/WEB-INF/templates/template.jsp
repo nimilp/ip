@@ -16,6 +16,8 @@
 
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/styles.css" rel="stylesheet">
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,25 +25,29 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-	
-    <script src="../js/external/jquery-3.1.1.min.js"></script>
-    <script src="../js/external/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../js/external/DataTables/datatables.min.css"/>
- 
-	<script src="../js/external/DataTables/datatables.min.js"></script>
+
+
+<script src="../js/external/jquery-3.1.1.min.js"></script>
+<script src="../js/external/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="../js/external/DataTables/datatables.min.css" />
+
+<script src="../js/external/DataTables/datatables.min.js"></script>
 </head>
 <body>
-	<div id="banner">
-		<tiles:insertAttribute name="header" />
+
+	<tiles:insertAttribute name="header" />
+
+	<div class="container-fluid">
+		<div class="row">
+			<tiles:insertAttribute name="navigation_bar" />
+			<div id="page"
+				class="panel panel-default">
+				<tiles:insertAttribute name="content" />
+			</div>
+		</div>
 	</div>
-	<div></div>
-	<tiles:insertAttribute name="navigation_bar" />
-	<div></div>
-	<div id="page">
-		<tiles:insertAttribute name="content" />
-	</div>
-	<div></div>
 	<div id="footer_wrapper">
 		<tiles:insertAttribute name="footer" />
 	</div>

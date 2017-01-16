@@ -25,10 +25,17 @@ public class AccountDAO implements IAccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	private Session getSession(){
+		Session session = sessionFactory.getCurrentSession();
+		if(session == null){
+			session = sessionFactory.openSession();
+		}
+		return session;
+	}
 //	@Override
 	public String save(AccountEntity account) {
 		account.setId(UUID.randomUUID().toString());
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		Serializable save = session.save(account);	
 		return save.toString();
 	}
@@ -36,7 +43,7 @@ public class AccountDAO implements IAccountDAO {
 //	@Override
 	
 	public List<AccountEntity> list() {
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		List<AccountEntity> accountList = session.createQuery("from AccountEntity").list();
 		session.flush();
 		return accountList;
@@ -46,13 +53,13 @@ public class AccountDAO implements IAccountDAO {
 	public AccountEntity get(String id) {
 		AccountEntity account = new AccountEntity();
 		account.setId(id);
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		return (AccountEntity) session.createCriteria(AccountEntity.class).add(Example.create(account)).uniqueResult();
 	}
 
 //	@Override
 	public String update(AccountEntity account) {
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		session.update(account);
 		session.flush();
 		return account.getId();
@@ -61,7 +68,7 @@ public class AccountDAO implements IAccountDAO {
 //	@Override
 	public String delete(String id) {
 		
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		AccountEntity account = get(id);
 		session.delete(account);
 		session.flush();

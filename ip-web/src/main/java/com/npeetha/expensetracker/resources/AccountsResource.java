@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,22 +23,28 @@ import com.npeetha.expensetracker.bo.Account;
 import com.npeetha.expensetracker.managers.IAccountManager;
 
 @RestController
+@RequestMapping(value="accounts")
 public class AccountsResource {
 
 	@Autowired
 	IAccountManager manager;
 //	ExpenseTrackerHDAO hdao;
 
-	@RequestMapping(value="/accounts",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getAccounts() throws JsonProcessingException {
 		
 		return new ModelAndView("accounts", "accounts", new ObjectMapper().writeValueAsString(manager.getAccounts()));
+	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public List<Account> listAccounts(){
+		return manager.getAccounts();
 	}
 
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)
 //	@Path("/{id}")
-	@RequestMapping(value="/accounts/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
+	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
 	public ModelAndView getAccount(@PathVariable String id) throws JsonProcessingException {
 		
 		String s = new ObjectMapper().writeValueAsString(manager.getAccounts());
@@ -54,7 +58,7 @@ public class AccountsResource {
 		return new ModelAndView("accounts", "accounts", new ObjectMapper().writeValueAsString(manager.getAccounts()));
 	}
 
-	@RequestMapping(value="/accounts", method=RequestMethod.POST)
+	@RequestMapping( method=RequestMethod.POST)
 	public String insertTimes(@RequestBody Account account) {
 		try {
 
@@ -66,14 +70,14 @@ public class AccountsResource {
 	}
 //
 //	@DELETE
-	@RequestMapping(value="/accounts/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public @ResponseBody void delete(@PathVariable String id) {
 		
 		manager.deleteAccount(id);
 	}
 //
 //	@PUT
-	@RequestMapping(value="/accounts", method=RequestMethod.PUT)
+	@RequestMapping( method=RequestMethod.PUT)
 	public String update(@RequestBody Account account) {
 		
 		try {
@@ -88,7 +92,7 @@ public class AccountsResource {
 	
 	@RequestMapping(value="/generate")
 	public String generate(){
-		for(int i =0;i<50;i++){
+		for(int i =0;i<4;i++){
 			Account account = new Account();
 			account.setBudget(new Random().nextDouble());
 			account.setDescription(RandomStringUtils.randomAlphabetic(20));

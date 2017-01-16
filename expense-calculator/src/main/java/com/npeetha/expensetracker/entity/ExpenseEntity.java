@@ -21,6 +21,12 @@ public class ExpenseEntity {
 	private int autoId;
 	private String id;
 	private double amount;
+	@Column(name = "account_id")
+	private String accountId;
+	
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="account_id", insertable=false, updatable=false)
+//	private AccountEntity account;
 	
 	@Column(name="place")
 	private String venue;
@@ -29,12 +35,13 @@ public class ExpenseEntity {
 	@Column(name="paid_time")
 	private Date paidOn;
 	
-	@Column(name="account_id")
-	private String accountId;
+//	@Column(name="account_id")
+//	private String accountId;
 
 	public int getAutoId() {
 		return autoId;
 	}
+	
 
 	public ExpenseEntity setAutoId(int autoId) {
 		this.autoId = autoId;
@@ -76,20 +83,31 @@ public class ExpenseEntity {
 		this.paidOn = paidOn;
 		return this;
 	}
+	
+//	public AccountEntity getAccount(){
+//		return this.account;
+//	}
 
 	public String getAccountId() {
 		return accountId;
 	}
-
+//
 	public ExpenseEntity setAccountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 	
+//	public ExpenseEntity setAccount(AccountEntity account){
+//		this.account =account;
+//		this.accountId = account.getId();
+//		return this;
+//	}
 	
 
 	public void copy(Expense expense) {
 		// ExpenseEntity entity = new ExpenseEntity();
+//		AccountEntity account = new AccountEntity();
+//		account.setId(expense.getAccountId());
 		this.setAccountId(expense.getAccountId()).setAmount(expense.getAmount()).setItem(expense.getItem())
 				.setPaidOn(expense.getPaidOn()).setVenue(expense.getVenue()).setAutoId(expense.getAutoId()).setId(expense.getId());;
 		// return entity;
@@ -109,5 +127,9 @@ public class ExpenseEntity {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+
+	
+	
 
 }

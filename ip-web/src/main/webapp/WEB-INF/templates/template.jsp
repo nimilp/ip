@@ -17,6 +17,7 @@
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/styles.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -43,8 +44,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<tiles:insertAttribute name="navigation_bar" />
-			<div id="page"
-				class="panel panel-default">
+			<div id="page">
 				<tiles:insertAttribute name="content" />
 			</div>
 		</div>

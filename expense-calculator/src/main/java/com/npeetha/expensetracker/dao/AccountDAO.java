@@ -11,6 +11,7 @@ import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.npeetha.common.dao.CoreDAO;
 import com.npeetha.expensetracker.bo.Account;
 import com.npeetha.expensetracker.entity.AccountEntity;
 
@@ -19,19 +20,19 @@ import com.npeetha.expensetracker.entity.AccountEntity;
  *
  */
 @Service
-public class AccountDAO implements IAccountDAO {
+public class AccountDAO extends CoreDAO implements IAccountDAO {
 	private static Logger log = Logger.getLogger(AccountDAO.class.getName());
 	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	private Session getSession(){
-		Session session = sessionFactory.getCurrentSession();
-		if(session == null){
-			session = sessionFactory.openSession();
-		}
-		return session;
-	}
+//	@Autowired
+//	private SessionFactory sessionFactory;
+//
+//	private Session getSession(){
+//		Session session = sessionFactory.getCurrentSession();
+//		if(session == null){
+//			session = sessionFactory.openSession();
+//		}
+//		return session;
+//	}
 //	@Override
 	public String save(AccountEntity account) {
 		account.setId(UUID.randomUUID().toString());

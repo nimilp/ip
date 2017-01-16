@@ -1,8 +1,14 @@
 Expense = function(settings) {
 	var current = this;
+	$.extend(current,{container: $('#editExpensePage')});
 	current.hideEditBox();
 	CKEDITOR.replace('venue');
+	current.bindButtonEvents();
 //	$('.selectpicker').selectpicker();
+}
+Expense.prototype.bindButtonEvents = function(){
+	var current = this;
+	current.container.find('#cancel').on('click', function(){current.hideEditBox()});
 }
 Expense.prototype.loadAccounts = function(){
 	$.ajax({
@@ -20,7 +26,9 @@ Expense.prototype.loadAccounts = function(){
 	});
 }
 Expense.prototype.hideEditBox = function(){
-	$('#editExpensePage').hide();
+	var current = this;
+	console.log(current);
+	current.container.hide();
 }
 Expense.prototype.bindExpenseList = function(expense){
 	var current = this;
@@ -64,7 +72,8 @@ Expense.prototype.bindEditValues = function(expense){
 	console.log(expense)
 	var editPage = $('#editExpensePage');
 	$(editPage).find("#item").val(expense.item);
-	$(editPage).find("#venue").val(expense.venue);
+	CKEDITOR.instances['venue'].setData(expense.venue);
+//	$(editPage).find("#venue").val(expense.venue);
 	$(editPage).find("#amount").val(expense.amount);
 	$(editPage).find("#account").val(expense.accountId);
 	$(editPage).find("#date").val(expense.paidOn);

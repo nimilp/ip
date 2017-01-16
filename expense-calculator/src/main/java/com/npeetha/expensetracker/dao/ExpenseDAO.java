@@ -1,18 +1,14 @@
 package com.npeetha.expensetracker.dao;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.npeetha.expensetracker.bo.Account;
-import com.npeetha.expensetracker.entity.AccountEntity;
+import com.npeetha.common.dao.CoreDAO;
 import com.npeetha.expensetracker.entity.ExpenseEntity;
 
 /**
@@ -20,19 +16,19 @@ import com.npeetha.expensetracker.entity.ExpenseEntity;
  *
  */
 @Service
-public class ExpenseDAO implements IExpenseDAO {
+public class ExpenseDAO extends CoreDAO implements IExpenseDAO {
 	private static Logger log = Logger.getLogger(ExpenseDAO.class.getName());
 	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	private Session getSession(){
-		Session session = sessionFactory.getCurrentSession();
-		if(session == null){
-			session = sessionFactory.openSession();
-		}
-		return session;
-	}
+//	@Autowired
+//	private SessionFactory sessionFactory;
+//
+//	private Session getSession(){
+//		Session session = sessionFactory.getCurrentSession();
+//		if(session == null){
+//			session = sessionFactory.openSession();
+//		}
+//		return session;
+//	}
 //	@Override
 	public String save(ExpenseEntity expense) {
 		expense.setId(UUID.randomUUID().toString());
@@ -70,7 +66,7 @@ public class ExpenseDAO implements IExpenseDAO {
 //	@Override
 	public String delete(String id) {
 		
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		ExpenseEntity expense = get(id);
 		session.delete(expense);
 		session.flush();

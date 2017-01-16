@@ -30,6 +30,7 @@
 <script src="../js/external/jquery-3.1.1.min.js"></script>
 <script src="../js/external/bootstrap.min.js"></script>
 <script src="../plugins/ckeditor/ckeditor.js"></script>
+<script src="../js/MyAppUtils.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../js/external/DataTables/datatables.min.css" />
 

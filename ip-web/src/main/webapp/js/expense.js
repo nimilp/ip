@@ -6,7 +6,7 @@ Expense = function(settings) {
 }
 Expense.prototype.loadAccounts = function(){
 	$.ajax({
-		url:'http://localhost:8088/myapps/accounts/list',
+		url:MyUtil.Server_Context()+'/myapps/accounts/list',
 		async:false,
 		success: function(data){
 			var accounts = $('#account');

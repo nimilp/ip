@@ -1,6 +1,7 @@
 Expense = function(settings) {
 	var current = this;
 	current.hideEditBox();
+	CKEDITOR.replace('venue');
 //	$('.selectpicker').selectpicker();
 }
 Expense.prototype.loadAccounts = function(){

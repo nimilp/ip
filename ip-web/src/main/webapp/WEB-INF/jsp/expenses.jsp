@@ -48,9 +48,9 @@
 				</div>
 				<div class="form-group">
 					<label for="venue" class="col-sm-2 control-label">Place</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="venue"
-							placeholder="Place">
+					<div class="col-sm-7">
+						<textarea class="form-control" id="venue" rows="3" cols="10"
+							placeholder="Place"></textarea>
 					</div>
 				</div>
 				<div class="form-group">

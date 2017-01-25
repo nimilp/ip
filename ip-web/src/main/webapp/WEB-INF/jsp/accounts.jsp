@@ -21,6 +21,7 @@
 	var a = ${accounts};//[{id:"956a347c-0da3-497e-b831-31a83626058a", name:"abcabcb", desc:"asdasda", budget:"24.0", lastUpdatedBy:null, _id:"15"}];
     $('#myTable').DataTable({
     	data:a,
+    	responsive:true,
     	columns:[
     	         {"data":"name"},
 	    	{"data":"description"},

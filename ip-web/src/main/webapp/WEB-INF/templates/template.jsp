@@ -15,9 +15,11 @@
 <title>Bootstrap 101 Template</title>
 
 <!-- Bootstrap -->
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/styles.css" rel="stylesheet">
-<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/styles.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,29 +30,36 @@
     <![endif]-->
 
 
-<script src="../js/external/jquery-3.1.1.min.js"></script>
-<script src="../js/external/bootstrap.min.js"></script>
-<script src="../plugins/ckeditor/ckeditor.js"></script>
-<script src="../js/MyAppUtils.js"></script>
+<script src="/js/external/jquery-3.1.1.min.js"></script>
+<script src="/js/external/bootstrap.min.js"></script>
+<script src="/vendor/metisMenu/metisMenu.js"></script>
+<script src="/js/external/sb-admin-2.min.js"></script>
+<script src="/plugins/ckeditor/ckeditor.js"></script>
+<script src="/js/MyAppUtils.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../js/external/DataTables/datatables.min.css" />
+	href="/js/external/DataTables/datatables.min.css" />
 
-<script src="../js/external/DataTables/datatables.min.js"></script>
+<script src="/js/external/DataTables/datatables.min.js"></script>
 </head>
 <body>
-
-	<tiles:insertAttribute name="header" />
-
-	<div class="container-fluid">
-		<div class="row">
-			<tiles:insertAttribute name="navigation_bar" />
-			<div id="page">
-				<tiles:insertAttribute name="content" />
+	<div id="wrapper">
+		<tiles:insertAttribute name="header" />
+		<tiles:insertAttribute name="navigation_bar" />
+		<div class="container-fluid">
+			<div class="row">
+				<div class="alert alert-success" id="success-alert" style="display:none; width:500px">
+				    <button type="button" class="close" data-dismiss="alert">x</button>
+				    <strong>Success! </strong>
+				    Saved  successfully
+				</div>
+				<div id="page">
+					<tiles:insertAttribute name="content" />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div id="footer_wrapper">
-		<tiles:insertAttribute name="footer" />
+		<div id="footer_wrapper">
+			<tiles:insertAttribute name="footer" />
+		</div>
 	</div>
 </body>
 </html>

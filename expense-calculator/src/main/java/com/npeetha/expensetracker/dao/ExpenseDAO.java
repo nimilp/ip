@@ -31,7 +31,8 @@ public class ExpenseDAO extends CoreDAO implements IExpenseDAO {
 //	}
 //	@Override
 	public String save(ExpenseEntity expense) {
-		expense.setId(UUID.randomUUID().toString());
+		if(expense.getId() == null || expense.getId().trim().isEmpty())
+			expense.setId(UUID.randomUUID().toString());
 		Session session = getSession();
 //		Serializable save = 
 		session.saveOrUpdate(expense);	

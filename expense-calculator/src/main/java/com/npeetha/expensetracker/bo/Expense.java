@@ -2,6 +2,8 @@ package com.npeetha.expensetracker.bo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Expense {
 
 	private int autoId;
@@ -35,6 +37,7 @@ public class Expense {
 		this.item = item;
 		return this;
 	}
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone="EST")
 	public Date getPaidOn() {
 		return paidOn;
 	}

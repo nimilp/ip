@@ -1,5 +1,6 @@
-<script src="../js/expense.js"></script>
-<div class="panel panel-primary">
+<script src="/js/expense.js"></script>
+
+<div class="panel panel-primary" id="primaryData">
 	<div class="panel-heading">
 		<h3 class="panel-title">Expenses</h3>
 	</div>
@@ -8,6 +9,7 @@
 			width="100%">
 			<thead>
 				<tr>
+					<th>Select</th>
 					<th>Item</th>
 					<th>Venue</th>
 					<th>Amount</th>
@@ -17,6 +19,7 @@
 			</thead>
 			<tfoot>
 				<tr>
+					<th>Select</th>
 					<th>Item</th>
 					<th>Venue</th>
 					<th>Amount</th>
@@ -30,7 +33,7 @@
 </div>
 <div id="editExpensePage" class="panel panel-info">
 	<div class="panel-heading">
-		Edit Expenses<i class="fa fa-times-circle-o fa-3" style="float:right" aria-hidden="true"></i>
+		Edit Expenses<i class="fa fa-times-circle-o fa-2x" style="float:right" aria-hidden="true"></i>
 	</div>
 	<div class="panel-body">
 		<form class="form-horizontal">
@@ -39,6 +42,7 @@
 				<div class="col-sm-2">
 					<input type="text" placeholder="Enter item" class="form-control"
 						id="item">
+					<input type="hidden" id="expenseId"/>	
 				</div>
 			</div>
 			<div class="form-group">
@@ -68,7 +72,7 @@
 			<div class="form-group">
 				<label for="date" class="col-sm-2 control-label">Date</label>
 				<div class="col-sm-2">
-					<input type="datetime" class="form-control" id="date"
+					<input type="date" class="form-control" id="date"
 						placeholder="Date">
 				</div>
 			</div>
@@ -84,6 +88,7 @@
 	</div>
 </div>
 <script>
+	
 	var expense = new Expense();
 	expense.bindExpenseList(${expenses});
 </script>

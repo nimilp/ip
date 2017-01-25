@@ -1,7 +1,34 @@
 /*
  * Base structure
  */
+.arrow {
+    float: right;
+    line-height: 1.42857;
+}
 
+.glyphicon.arrow:before {
+    content: "\e079";
+}
+
+.active > a > .glyphicon.arrow:before {
+    content: "\e114";
+}
+
+
+/*
+ * Require Font-Awesome
+ * http://fortawesome.github.io/Font-Awesome/
+*/
+
+
+.fa.arrow:before {
+    content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+    content: "\f107";
+}
+/* 
 .navbar-default {
   background-color: #0275d8;
   border-color: #5699d4;
@@ -90,7 +117,7 @@
     color: #ececd6;
     background-color: #5699d4;
   }
-}
+} */
 .footer {
     position: relative;
     bottom: 0;

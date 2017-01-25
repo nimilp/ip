@@ -24,8 +24,7 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Expense Tracker <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/myapps/expenses">Expense List</a></li>
-						<li><a href="#">New Expense</a></li>
+						<li><a href="/myapps/expensetracker/expense.exp">Expense List</a></li>
 						<li><a href="#">New Expense</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="/myapps/accounts">Account List</a></li>

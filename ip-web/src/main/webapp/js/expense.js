@@ -32,6 +32,7 @@ Expense.prototype.loadAccounts = function(){
 Expense.prototype.hideEditBox = function(){
 	var current = this;
 	current.container.hide();
+	MyUtil.scrollToTop();
 }
 Expense.prototype.bindExpenseList = function(expense){
 	console.log(expense);
@@ -95,9 +96,7 @@ Expense.prototype.bindEditValues = function(expense){
 	$(editPage).find("#account").val(expense.accountId);
 	$(editPage).find("#date").val(expense.paidOn);
 	editPage.show(1000);
-	$('html, body').animate({
-		scrollTop: editPage.offset().top
-	},1000);
+	MyUtil.scrollToTop(1000, $('#editExpensePage'))
 }
 Expense.prototype.saveExpense = function(){
 	var current = this;
@@ -118,15 +117,13 @@ Expense.prototype.saveExpense = function(){
 		contentType:'application/json',
 		dataType:"json",
 		success: function(response){
-			$('html, body').animate({
-				scrollTop: $('html body').offset().top
-			},1000);
-			current.hideEditBox();
+			MyUtil.scrollToTop(500);
 			current.successfulSave();
 		},
 		error: function(response){
 			//alert(response.status);
 			current.hideEditBox();
+			MyUtil.showSuccessOrError(false);
 		}
 	});
 }
@@ -137,22 +134,18 @@ Expense.prototype.successfulSave = function(){
 		method: "GET",
 		dataType:"json",
 		success: function(response){
-			console.log(response);
-			  
-        
+			current.hideEditBox();
 			var dataTable = $('#expenseTable').DataTable();
 			dataTable.clear().draw();
 			dataTable.rows.add(response);
 			dataTable.columns.adjust().draw();
-			$("#success-alert").alert();
-            $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-           $("#success-alert").slideUp(500);
-            }); 
+			MyUtil.showSuccessOrError(true);
 //			current.bindExpenseList();
 		},
 		error: function(response){
-			alert(response.status);
-//			current.hideEditBox();
+//			alert(response.status);
+			current.hideEditBox();
+			MyUtil.showSuccessOrError(false);
 		}
 	});
 }

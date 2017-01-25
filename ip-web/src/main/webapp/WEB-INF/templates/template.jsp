@@ -47,10 +47,15 @@
 		<tiles:insertAttribute name="navigation_bar" />
 		<div class="container-fluid">
 			<div class="row">
-				<div class="alert alert-success" id="success-alert" style="display:none; width:500px">
+				<div class="alert alert-success center-block" id="success-alert" style="display:none; width:500px">
 				    <button type="button" class="close" data-dismiss="alert">x</button>
 				    <strong>Success! </strong>
 				    Saved  successfully
+				</div>
+				<div class="alert alert-danger center-block" id="error-alert" style="display:none; width:500px;">
+				    <button type="button" class="close" data-dismiss="alert">x</button>
+				    <strong>Error! </strong>
+				    Something went wrong
 				</div>
 				<div id="page">
 					<tiles:insertAttribute name="content" />

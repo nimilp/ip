@@ -14,13 +14,91 @@ Expense.prototype.bindButtonEvents = function(){
 	});
 	current.container.find('#cancel').on('click', function(){current.hideEditBox()});
 	$('#save').off().on('click', function(){current.saveExpense()});
+	$('#newExpense').off().on('click', function(){
+		current.newExpenseForm();
+	})
 }
-Expense.prototype.loadAccounts = function(){
+Expense.prototype.newExpenseForm = function(){
+//	bootbox.alert("Hello world!", function() {
+//        console.log("Alert Callback");
+//    });
+	var box =bootbox.dialog({
+		onEscape:true,
+		closeButton:false,
+//		title:"New Expense",
+		message:'<div id="newExpensePage" class="panel panel-info">'+
+					'<div class="panel-heading">New Expenses<i id="dialogClose" class="fa fa-times-circle-o fa-2x" style="float: right" aria-hidden="true"></i></div>'+
+					'<div class="panel-body">'+
+						'<form class="form-horizontal">'+
+							'<div class="form-group">'+
+								'<label for="newItem" class="col-sm-2 control-label">Item</label>'+
+								'<div class="col-sm-5">'+
+									'<input type="text" placeholder="Enter item" class="form-control"	id="newItem">'+
+								'</div>'+
+							'</div>'+
+							'<div class="form-group">'+
+								'<label for="newAmount" class="col-sm-2 control-label">Amount</label>'+
+								'<div class="col-sm-5">'+
+									'<div class="input-group">'+
+										'<span class="input-group-addon">$</span> <input type="text" class="form-control" id="newAmount" placeholder="Amount">'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+							'<div class="form-group">'+
+								'<label for="newVenue" class="col-sm-2 control-label">Place</label>'+
+								'<div class="col-sm-7">'+
+									'<textarea class="form-control" id="newVenue" rows="3" cols="10" placeholder="Place"></textarea>'+
+								'</div>'+
+							'</div>'+
+							'<div class="form-group">'+
+								'<label for="account" class="col-sm-2 control-label">Account</label>'+
+								'<div class="col-sm-5">'+
+									'<select id="newAccount" class="form-control">'+
+										'<option value="-1">Select an account</option>'+
+									'</select>'+
+								'</div>'+
+							'</div>'+
+							'<div class="form-group">'+
+								'<label for="newDate" class="col-sm-2 control-label">Date</label>'+
+								'<div class="col-sm-5">'+
+									'<input type="date" class="form-control" id="newDate" placeholder="Date">'+
+								'</div>'+
+							'</div>'+
+						'</form>'+
+					'</div>'+
+				'</div>',
+				buttons:{
+					yes :{
+						label:'Create',
+						className:'btn btn-default btn-primary'
+					},
+					cancel:{
+						label:'Cancel',
+						className:'btn btn-default'
+					}
+				}
+	});
+	box.on('shown.bs.modal', function(){
+		Expense.prototype.loadAccounts('#newAccount');
+		$('#dialogClose.fa-times-circle-o').on('click', function(){
+//			console.log(this);
+			Expense.prototype.hideBox(box)
+		});
+	});
+}
+Expense.prototype.hideBox = function(box){
+	box.modal('hide');
+}
+Expense.prototype.loadAccounts = function(selector){
+	var mySelector = '#account';
+	if(selector){
+		mySelector = selector
+	}
 	$.ajax({
 		url:MyUtil.Server_Context()+'/myapps/accounts/list',
 		async:false,
 		success: function(data){
-			var accounts = $('#account');
+			var accounts = $(selector);
 
 			$.each(data,function(i,d){
 				//console.log(i,d);
@@ -40,14 +118,15 @@ Expense.prototype.bindExpenseList = function(expense){
 	var dataTable = $('#expenseTable').DataTable({
 		responsive:true,
 		data : expense,
+		order:[[4,'desc']],
 		columnDefs: [
 		{
-			sortable:false,
-			width:"50px",
+			
+			width:"90px",
 			render: function(data,type,row,meta){
 		    	 
 		    	 return "<input type=\"checkbox\" id=\""+row.id+"\"data-autoid=\""+row.autoId+"\" data-account-id=\""+row.accountId+"\">";
-		     },"targets":0 
+		     },"targets":0 ,orderable:false
 		},
 		{
 			
@@ -66,21 +145,34 @@ Expense.prototype.bindExpenseList = function(expense){
 			"data":"accountName", "targets":5
 		}
 		],
+		
 		"createdRow": function(row,data,index){
 			var current = this;
 			$(row).on('click', function(current){
-				console.log($(current.target).type);
-				if($(current.target) === 'input'){
-					console.log('here');
-					current.cancel();
+				
+				if($(current.target).attr('tabindex') || $(current.target).is('input')){
+					Expense.prototype.selectAll();
+					current.stopPropagation();
 					return;
+				} else{
+					Expense.prototype.bindEditValues(data);
 				}
-				Expense.prototype.bindEditValues(data);
 			});
 		}
 
 	});
 	current.loadAccounts();
+}
+Expense.prototype.selectAll = function(){
+//	if($(checkbox).prop('checked')){
+		var countOfChecked = $('input[data-autoid]:checked').length;
+		var countOfAll = $('input[data-autoid]').length;
+		if( countOfChecked == countOfAll){
+			$('.selectAll').prop('checked',true);
+		}else{
+			$('.selectAll').prop('checked',false);
+		}
+//	}
 }
 Expense.prototype.bindEditValues = function(expense){
 //	console.log(expense)
@@ -95,6 +187,7 @@ Expense.prototype.bindEditValues = function(expense){
 	$(editPage).find("#amount").val(expense.amount);
 	$(editPage).find("#account").val(expense.accountId);
 	$(editPage).find("#date").val(expense.paidOn);
+	editPage.toggle();
 	editPage.show(1000);
 	MyUtil.scrollToTop(1000, $('#editExpensePage'))
 }

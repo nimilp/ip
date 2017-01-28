@@ -32,6 +32,7 @@
 
 <script src="/js/external/jquery-3.1.1.min.js"></script>
 <script src="/js/external/bootstrap.min.js"></script>
+<script src="/js/external/bootbox.min.js"></script>
 <script src="/vendor/metisMenu/metisMenu.js"></script>
 <script src="/js/external/sb-admin-2.min.js"></script>
 <script src="/plugins/ckeditor/ckeditor.js"></script>
@@ -47,7 +48,7 @@
 		<tiles:insertAttribute name="navigation_bar" />
 		<div class="container-fluid">
 			<div class="row">
-				<div class="alert alert-success center-block" id="success-alert" style="display:none; width:500px">
+				<div class="alert alert-move alert-success center-block" id="success-alert" style="display:none; width:500px">
 				    <button type="button" class="close" data-dismiss="alert">x</button>
 				    <strong>Success! </strong>
 				    Saved  successfully

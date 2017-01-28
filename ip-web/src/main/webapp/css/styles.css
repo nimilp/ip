@@ -125,3 +125,18 @@
     height: 60px;
     background-color: #f5f5f5;
 }
+
+i.fa-times-circle-o:hover{
+	cursor: pointer;
+} 
+.panel {
+	margin:10px;
+}
+/* .panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 75%;
+    padding-top: 8px;
+} */

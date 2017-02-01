@@ -7,12 +7,12 @@ MyUtil.Server_Context = function(){
 MyUtil.showSuccessOrError = function(success){
 	if(success){
 		$("#success-alert").alert();
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#success-alert").fadeTo(500, 500).slideUp(500, function(){
        		$("#success-alert").slideUp(500);
         }); 
 	}else{
 		$("#error-alert").alert();
-        $("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#error-alert").fadeTo(500, 500).slideUp(500, function(){
        		$("#error-alert").slideUp(500);
         }); 
 	}

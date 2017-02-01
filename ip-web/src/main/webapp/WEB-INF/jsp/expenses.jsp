@@ -1,4 +1,4 @@
-<script src="/js/expense.js"></script>
+<script src="/js/internal/expense.js"></script>
 
 <div class="panel panel-primary" id="primaryData">
 	<div class="panel-heading">
@@ -42,14 +42,14 @@
 	</div>
 	<div class="panel-body">
 		<form class="form-horizontal">
-			<div class="form-group">
+			<div id="itemDiv" class="form-group">
 				<label for="item" class="col-sm-2 control-label">Item</label>
 				<div class="col-sm-2">
 					<input type="text" placeholder="Enter item" class="form-control"
 						id="item"> <input type="hidden" id="expenseId" />
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="amountDiv">
 				<label for="amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-2">
 					<div class="input-group">
@@ -58,14 +58,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="venueDiv">
 				<label for="venue" class="col-sm-2 control-label">Place</label>
 				<div class="col-sm-7">
 					<textarea class="form-control" id="venue" rows="3" cols="10"
 						placeholder="Place"></textarea>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="accountDiv">
 				<label for="account" class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-2">
 					<select id="account" class="form-control">
@@ -73,7 +73,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="dateDiv">
 				<label for="date" class="col-sm-2 control-label">Date</label>
 				<div class="col-sm-2">
 					<input type="date" class="form-control" id="date"

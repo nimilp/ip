@@ -36,7 +36,7 @@
 <script src="/vendor/metisMenu/metisMenu.js"></script>
 <script src="/js/external/sb-admin-2.min.js"></script>
 <script src="/plugins/ckeditor/ckeditor.js"></script>
-<script src="/js/MyAppUtils.js"></script>
+<script src="/js/internal/MyAppUtils.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/js/external/DataTables/datatables.min.css" />
 
@@ -48,12 +48,12 @@
 		<tiles:insertAttribute name="navigation_bar" />
 		<div class="container-fluid">
 			<div class="row">
-				<div class="alert alert-move alert-success center-block" id="success-alert" style="display:none; width:500px">
+				<div class="alert alert-active alert-success center-block" id="success-alert" style="display:none;">
 				    <button type="button" class="close" data-dismiss="alert">x</button>
 				    <strong>Success! </strong>
 				    Saved  successfully
 				</div>
-				<div class="alert alert-danger center-block" id="error-alert" style="display:none; width:500px;">
+				<div class="alert alert-danger alert-active center-block" id="error-alert" style="display:none">
 				    <button type="button" class="close" data-dismiss="alert">x</button>
 				    <strong>Error! </strong>
 				    Something went wrong

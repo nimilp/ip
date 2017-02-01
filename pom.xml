@@ -29,6 +29,11 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+      <name>oss.sonatype.org</name>
+      <id>oss.sonatype.org</id>
+      <url>http://oss.sonatype.org/content/groups/public</url>
+    </pluginRepository>
 	</pluginRepositories>
 	<properties>
 		<tiles.version>3.0.1</tiles.version>
@@ -195,6 +200,12 @@
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.0</version>
 		</dependency>
+		<!--<dependency>
+		  <groupId>net.alchim31.maven</groupId>
+		  <artifactId>yuicompressor-maven-plugin</artifactId>
+		  <version>1.5.1</version>
+		  <type>maven-plugin</type>
+		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
 
 
@@ -212,12 +223,54 @@
 			<build>
 				<finalName>ip</finalName>
 				<plugins>
+
+					<plugin>
+		        <groupId>net.alchim31.maven</groupId>
+		        <artifactId>yuicompressor-maven-plugin</artifactId>
+						<version>1.5.1</version>
+		        <executions>
+		          <execution>
+								<phase>prepare-package</phase>
+		            <goals>
+		              <goal>compress</goal>
+		            </goals>
+								<configuration>
+									<warSourceDirectory>src/main/webapp/js</warSourceDirectory>
+									<outputDirectory>target/minimized</outputDirectory>
+									<force>true</force>
+									<statistics>true</statistics>
+				          <nosuffix>true</nosuffix>
+									<nomunge>false</nomunge>
+									<linebreakpos>-1</linebreakpos>
+									<webappDirectory>target/minimized</webappDirectory>
+									<failOnWarning>false</failOnWarning>
+									<jswarn>false</jswarn>
+									<includes>
+										<include>**/internal/*.js</include>
+									</includes>
+				        </configuration>
+		          </execution>
+		        </executions>
+		      </plugin>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>
 						<version>2.1.1</version>
 						<configuration>
 							<outputDirectory>webapps</outputDirectory>
 							<warName>ROOT</warName>
+							<webResources>
+								<resource>
+									<directory>target/minimized</directory>
+									<!-- <excludes>
+										<exclude>internal/*.*</exclude>
+									</excludes>
+									<includes>
+										<include>external/*.*
+										</include>
+									</includes> -->
+									<targetPath>js</targetPath>
+							</resource>
+							</webResources>
 						</configuration>
 					</plugin>
 				</plugins>

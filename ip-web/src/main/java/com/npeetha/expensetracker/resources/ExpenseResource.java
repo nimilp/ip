@@ -71,7 +71,7 @@ public class ExpenseResource {
 		returnString = "{\"success\":\"true\",\"id\":\""+expense.getId()+"\"}";
 		}catch(Exception e){
 			e.printStackTrace();
-			returnString = "{\"error\":\"true\"}";
+			returnString = "{\"error\":\"true\",\"message\":\""+e.getMessage()+"\"}";
 		}
 		return returnString;
 	}

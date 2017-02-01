@@ -30,13 +30,13 @@ Expense.prototype.newExpenseForm = function(){
 					'<div class="panel-heading">New Expenses<i id="dialogClose" class="fa fa-times-circle-o fa-2x" style="float: right" aria-hidden="true"></i></div>'+
 					'<div class="panel-body">'+
 						'<form class="form-horizontal">'+
-							'<div class="form-group">'+
+							'<div class="form-group" id="newItemDiv">'+
 								'<label for="newItem" class="col-sm-2 control-label">Item</label>'+
 								'<div class="col-sm-5">'+
 									'<input type="text" placeholder="Enter item" class="form-control"	id="newItem">'+
 								'</div>'+
 							'</div>'+
-							'<div class="form-group">'+
+							'<div class="form-group" id="newAmountDiv">'+
 								'<label for="newAmount" class="col-sm-2 control-label">Amount</label>'+
 								'<div class="col-sm-5">'+
 									'<div class="input-group">'+
@@ -44,13 +44,13 @@ Expense.prototype.newExpenseForm = function(){
 									'</div>'+
 								'</div>'+
 							'</div>'+
-							'<div class="form-group">'+
+							'<div class="form-group" id="newVenueDiv">'+
 								'<label for="newVenue" class="col-sm-2 control-label">Place</label>'+
 								'<div class="col-sm-7">'+
 									'<textarea class="form-control" id="newVenue" rows="3" cols="10" placeholder="Place"></textarea>'+
 								'</div>'+
 							'</div>'+
-							'<div class="form-group">'+
+							'<div class="form-group" id="newAccountDiv">'+
 								'<label for="account" class="col-sm-2 control-label">Account</label>'+
 								'<div class="col-sm-5">'+
 									'<select id="newAccount" class="form-control">'+
@@ -58,7 +58,7 @@ Expense.prototype.newExpenseForm = function(){
 									'</select>'+
 								'</div>'+
 							'</div>'+
-							'<div class="form-group">'+
+							'<div class="form-group" id="newDateDiv">'+
 								'<label for="newDate" class="col-sm-2 control-label">Date</label>'+
 								'<div class="col-sm-5">'+
 									'<input type="date" class="form-control" id="newDate" placeholder="Date">'+
@@ -70,7 +70,11 @@ Expense.prototype.newExpenseForm = function(){
 				buttons:{
 					yes :{
 						label:'Create',
-						className:'btn btn-default btn-primary'
+						className:'btn btn-default btn-primary',
+						callback: function(){ 
+							var returnValue= Expense.prototype.createExpense();
+							return returnValue;
+						}
 					},
 					cancel:{
 						label:'Cancel',
@@ -84,6 +88,8 @@ Expense.prototype.newExpenseForm = function(){
 //			console.log(this);
 			Expense.prototype.hideBox(box)
 		});
+//		CKEDITOR.replace('newVenue');
+		
 	});
 }
 Expense.prototype.hideBox = function(box){
@@ -98,7 +104,7 @@ Expense.prototype.loadAccounts = function(selector){
 		url:MyUtil.Server_Context()+'/myapps/accounts/list',
 		async:false,
 		success: function(data){
-			var accounts = $(selector);
+			var accounts = $(mySelector);
 
 			$.each(data,function(i,d){
 				//console.log(i,d);
@@ -109,7 +115,9 @@ Expense.prototype.loadAccounts = function(selector){
 }
 Expense.prototype.hideEditBox = function(){
 	var current = this;
-	current.container.hide();
+	if(current.container){
+		current.container.hide();
+	}
 	MyUtil.scrollToTop();
 }
 Expense.prototype.bindExpenseList = function(expense){
@@ -191,6 +199,53 @@ Expense.prototype.bindEditValues = function(expense){
 	editPage.show(1000);
 	MyUtil.scrollToTop(1000, $('#editExpensePage'))
 }
+Expense.prototype.validate = function(expense, isEdit){
+	var markedError = false;
+	var itemSelector = '#itemDiv';
+	var amountSelector ='#amountDiv';
+	var venueSelector = '#venueDiv';
+	var accountSelector = '#accountDiv';
+	var dateSelector = '#dateDiv';
+	if(!isEdit){
+		itemSelector = '#newItemDiv';
+		amountSelector = '#newAmountDiv';
+		venueSelector = '#newVenueDiv';
+		accountSelector = '#newAccountDiv';
+		dateSelector = '#newDateDiv';
+			
+	}
+	if(!expense.item){
+		$(itemSelector).addClass('has-error');
+		markedError = true;
+	}else{
+		$(itemSelector).removeClass('has-error');
+	}
+	if(!expense.amount){
+		$(amountSelector).addClass('has-error');
+		markedError = true;
+	}else{
+		$(amountSelector).removeClass('has-error');
+	}
+	if(!expense.venue){
+		$(venueSelector).addClass('has-error');
+		markedError = true;
+	}else{
+		$(venueSelector).removeClass('has-error');
+	}
+	if(+(expense.accountId) === -1){
+		$(accountSelector).addClass('has-error');
+		markedError = true;
+	}else{
+		$(accountSelector).removeClass('has-error');
+	}
+	if(!expense.paidOn){
+		$(dateSelector).addClass('has-error');
+		markedError = true;
+	}else{
+		$(dateSelector).removeClass('has-error');
+	}
+	return markedError;
+}
 Expense.prototype.saveExpense = function(){
 	var current = this;
 	var editPage = $('#editExpensePage');
@@ -203,6 +258,24 @@ Expense.prototype.saveExpense = function(){
 		'accountId': $('#account').val(),
 		'autoId':$('#expenseId').data("autoid")
 	};
+	this.saveExpenseCall(expense, true);
+}
+Expense.prototype.createExpense = function(){
+	var current = this;
+	var editPage = $('#newExpensePage');
+	var expense = {
+		'item': $("#newItem").val(),
+		'venue': $('#newVenue').val(),
+		'amount': $(editPage).find('#newAmount').val(),
+		'paidOn': $(editPage).find('#newDate').val(),
+		'accountId': $('#newAccount').val()
+	};
+	return Expense.prototype.saveExpenseCall(expense,false);
+}
+Expense.prototype.saveExpenseCall = function(expense, isEdit){
+	var current = this;
+	var isBad = current.validate(expense,isEdit);
+	if(!isBad){
 	$.ajax({
 		url: MyUtil.Server_Context()+"/myapps/expensetracker/expense.exp",
 		method: "POST",
@@ -211,7 +284,12 @@ Expense.prototype.saveExpense = function(){
 		dataType:"json",
 		success: function(response){
 			MyUtil.scrollToTop(500);
-			current.successfulSave();
+			if(response.success){
+				current.successfulSave();
+			}else{
+				current.hideEditBox();
+				MyUtil.showSuccessOrError(false);
+			}
 		},
 		error: function(response){
 			//alert(response.status);
@@ -219,6 +297,9 @@ Expense.prototype.saveExpense = function(){
 			MyUtil.showSuccessOrError(false);
 		}
 	});
+	}else{
+		return false;
+	}
 }
 Expense.prototype.successfulSave = function(){
 	var current = this;
@@ -228,10 +309,12 @@ Expense.prototype.successfulSave = function(){
 		dataType:"json",
 		success: function(response){
 			current.hideEditBox();
-			var dataTable = $('#expenseTable').DataTable();
-			dataTable.clear().draw();
-			dataTable.rows.add(response);
-			dataTable.columns.adjust().draw();
+			if(response.success){
+				var dataTable = $('#expenseTable').DataTable();
+				dataTable.clear().draw();
+				dataTable.rows.add(response);
+				dataTable.columns.adjust().draw();
+			}
 			MyUtil.showSuccessOrError(true);
 //			current.bindExpenseList();
 		},

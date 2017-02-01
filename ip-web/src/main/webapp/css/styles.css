@@ -132,6 +132,13 @@ i.fa-times-circle-o:hover{
 .panel {
 	margin:10px;
 }
+.alert-active {
+	z-index:999;
+	position:fixed;
+	width:40%;
+	left:30%;
+	
+}
 /* .panel-heading h3 {
     white-space: nowrap;
     overflow: hidden;

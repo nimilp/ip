@@ -16,10 +16,10 @@
 
 <!-- Bootstrap -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/styles.css" rel="stylesheet">
+<link href="/css/internal/styles.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet">
-<link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.min.css" rel="stylesheet"> -->
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -33,8 +33,8 @@
 <script src="/js/external/jquery-3.1.1.min.js"></script>
 <script src="/js/external/bootstrap.min.js"></script>
 <script src="/js/external/bootbox.min.js"></script>
-<script src="/vendor/metisMenu/metisMenu.js"></script>
-<script src="/js/external/sb-admin-2.min.js"></script>
+<!-- <script src="/vendor/metisMenu/metisMenu.js"></script>
+<script src="/js/external/sb-admin-2.min.js"></script> -->
 <script src="/plugins/ckeditor/ckeditor.js"></script>
 <script src="/js/internal/MyAppUtils.js"></script>
 <link rel="stylesheet" type="text/css"

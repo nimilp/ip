@@ -235,7 +235,7 @@
 		              <goal>compress</goal>
 		            </goals>
 								<configuration>
-									<warSourceDirectory>src/main/webapp/js</warSourceDirectory>
+									<warSourceDirectory>src/main/webapp</warSourceDirectory>
 									<outputDirectory>target/minimized</outputDirectory>
 									<force>true</force>
 									<statistics>true</statistics>
@@ -247,6 +247,7 @@
 									<jswarn>false</jswarn>
 									<includes>
 										<include>**/internal/*.js</include>
+										<include>**/internal/*.css</include>
 									</includes>
 				        </configuration>
 		          </execution>
@@ -263,12 +264,12 @@
 									<directory>target/minimized</directory>
 									<!-- <excludes>
 										<exclude>internal/*.*</exclude>
-									</excludes>
-									<includes>
-										<include>external/*.*
+									</excludes>-->
+									<!-- <includes>
+										<include>**/*.js
 										</include>
 									</includes> -->
-									<targetPath>js</targetPath>
+									<!-- <targetPath>js</targetPath> -->
 							</resource>
 							</webResources>
 						</configuration>

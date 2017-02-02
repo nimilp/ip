@@ -5,7 +5,7 @@ Expense = function(settings) {
 	current.hideEditBox();
 	CKEDITOR.replace('venue');
 	current.bindButtonEvents();
-//	$('.selectpicker').selectpicker();
+	current.bindSelectAll();
 }
 Expense.prototype.bindButtonEvents = function(){
 	var current = this;
@@ -16,12 +16,52 @@ Expense.prototype.bindButtonEvents = function(){
 	$('#save').off().on('click', function(){current.saveExpense()});
 	$('#newExpense').off().on('click', function(){
 		current.newExpenseForm();
-	})
+	});
+	$('#deleteExpense').off().on('click', function(){
+		var ids = [];
+		var checked = $('input[data-autoid]:checked');
+		if(checked.length>0){
+			checked.each(function(index,checkbox){
+				
+				ids.push($(checkbox).attr('id'))
+			});
+			
+			current.deleteExpenses(ids);
+		}else{
+			var dialog =bootbox.dialog({
+				message:"<p class='alert alert-danger' role='alert'><i class='fa fa-exclamation-circle fa-2x'/> You must select an expense to delete!</p>",
+				onEscape:true,
+				closeButton:false, 
+				backdrop:true,
+				size:'small'
+				});
+			setTimeout(function(){
+				dialog.modal('hide');
+			},2000)
+		}
+	});
 }
+Expense.prototype.deleteExpenses=function(ids){
+	var current = this;
+	$.ajax({
+		url: MyUtil.Server_Context()+"/myapps/expensetracker/delete.exp",
+		method: "POST",
+		dataType:'json',
+		data:{'id':ids},
+		success: function(response){
+			MyUtil.scrollToTop(500);
+			if(response.success){
+				current.successfulSave();
+			}else{
+//				current.hideEditBox();
+				MyUtil.showSuccessOrError(false);
+			}
+		}
+	});
+}
+
 Expense.prototype.newExpenseForm = function(){
-//	bootbox.alert("Hello world!", function() {
-//        console.log("Alert Callback");
-//    });
+
 	var box =bootbox.dialog({
 		onEscape:true,
 		closeButton:false,
@@ -85,11 +125,9 @@ Expense.prototype.newExpenseForm = function(){
 	box.on('shown.bs.modal', function(){
 		Expense.prototype.loadAccounts('#newAccount');
 		$('#dialogClose.fa-times-circle-o').on('click', function(){
-//			console.log(this);
+
 			Expense.prototype.hideBox(box)
 		});
-//		CKEDITOR.replace('newVenue');
-		
 	});
 }
 Expense.prototype.hideBox = function(box){
@@ -172,7 +210,7 @@ Expense.prototype.bindExpenseList = function(expense){
 	current.loadAccounts();
 }
 Expense.prototype.selectAll = function(){
-//	if($(checkbox).prop('checked')){
+
 		var countOfChecked = $('input[data-autoid]:checked').length;
 		var countOfAll = $('input[data-autoid]').length;
 		if( countOfChecked == countOfAll){
@@ -180,10 +218,19 @@ Expense.prototype.selectAll = function(){
 		}else{
 			$('.selectAll').prop('checked',false);
 		}
-//	}
+
+}
+Expense.prototype.bindSelectAll = function(){
+	
+	$('.selectAll').off().on('change', function(e){
+		var allCheckbox = $('input[type="checkbox"][data-autoid]');
+		var isChecked = $(e.currentTarget).prop('checked');
+		allCheckbox.prop('checked',isChecked);
+		$('.selectAll').prop('checked',isChecked);
+	});
 }
 Expense.prototype.bindEditValues = function(expense){
-//	console.log(expense)
+
 	var editPage = $('#editExpensePage');
 	var expenseId = $(editPage).find("#expenseId");
 	$(expenseId).val(expense.id);
@@ -191,7 +238,6 @@ Expense.prototype.bindEditValues = function(expense){
 	
 	$(editPage).find("#item").val(expense.item);
 	CKEDITOR.instances['venue'].setData(expense.venue);
-//	$(editPage).find("#venue").val(expense.venue);
 	$(editPage).find("#amount").val(expense.amount);
 	$(editPage).find("#account").val(expense.accountId);
 	$(editPage).find("#date").val(expense.paidOn);
@@ -292,7 +338,7 @@ Expense.prototype.saveExpenseCall = function(expense, isEdit){
 			}
 		},
 		error: function(response){
-			//alert(response.status);
+			
 			current.hideEditBox();
 			MyUtil.showSuccessOrError(false);
 		}
@@ -309,19 +355,20 @@ Expense.prototype.successfulSave = function(){
 		dataType:"json",
 		success: function(response){
 			current.hideEditBox();
-			if(response.success){
+			if(response){
 				var dataTable = $('#expenseTable').DataTable();
 				dataTable.clear().draw();
 				dataTable.rows.add(response);
 				dataTable.columns.adjust().draw();
 			}
 			MyUtil.showSuccessOrError(true);
-//			current.bindExpenseList();
+
 		},
 		error: function(response){
-//			alert(response.status);
+
 			current.hideEditBox();
 			MyUtil.showSuccessOrError(false);
 		}
 	});
 }
+

@@ -2,6 +2,7 @@ package com.npeetha.expensetracker.managers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +53,9 @@ public class ExpenseManager implements IExpenseManager {
 
 	@Override
 	@Transactional
-	public String delete() {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(String[] ids) {
+		
+		dao.delete(ids);
 	}
 	@Override
 	@Transactional

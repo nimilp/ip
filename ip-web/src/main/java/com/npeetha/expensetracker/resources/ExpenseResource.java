@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,15 @@ public class ExpenseResource {
 	
 	@RequestMapping(value="/expense.exp",method=RequestMethod.GET)
 	public ModelAndView getExpenses() throws JsonProcessingException {
-//		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
 		ObjectMapper mapper = new ObjectMapper();
-//		mapper.setDateFormat(df);
 		return new ModelAndView("expenses", "expenses", mapper.writeValueAsString(manager.list()));
 	};
 	
 	@ResponseBody
 	@RequestMapping(value="/listexpenses.exp",method=RequestMethod.GET)
 	public List<Expense> getExpenseList() throws JsonProcessingException {
-//		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
+		
 		ObjectMapper mapper = new ObjectMapper();
-//		mapper.setDateFormat(df);
 		return manager.list();
 	};
 
@@ -69,6 +67,19 @@ public class ExpenseResource {
 		try{
 		manager.create(expense);
 		returnString = "{\"success\":\"true\",\"id\":\""+expense.getId()+"\"}";
+		}catch(Exception e){
+			e.printStackTrace();
+			returnString = "{\"error\":\"true\",\"message\":\""+e.getMessage()+"\"}";
+		}
+		return returnString;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delete.exp", method = RequestMethod.POST)
+	public String deleteExpense( @RequestParam(value="id[]") String[] id){
+		String returnString = "{\"success\":\"true\"}";
+		try{
+			manager.delete(id);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnString = "{\"error\":\"true\",\"message\":\""+e.getMessage()+"\"}";

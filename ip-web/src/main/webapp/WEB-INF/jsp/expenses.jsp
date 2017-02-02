@@ -3,9 +3,21 @@
 <div class="panel panel-primary" id="primaryData">
 	<div class="panel-heading">
 		<h3 class="panel-title pull-left">Expenses</h3>
-		<button id="newExpense" class="btn brn-default btn-primary pull-right">New
+		<i class="fa"></i>
+		<!-- Single button -->
+		<div class="btn-group">
+		  <i class="fa fa-bars fa-1x dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <!-- Action <span class="caret"></span> -->
+		  </i>
+		  <ul class="dropdown-menu">
+		    <li><a id="newExpense" href="#">New Expense</a></li>
+		    <li role="separator" class="divider"></li>
+		    <li><a id="deleteExpense" href="#">Delete Expense</a></li>
+		  </ul>
+		</div>
+		<!-- <button id="newExpense" class="btn brn-default btn-primary pull-right">New
 			Expense</button>
-		<div class="clearfix"></div>
+		<div class="clearfix"></div> -->
 
 	</div>
 	<div class="panel-body">

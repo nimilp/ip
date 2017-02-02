@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.springframework.stereotype.Service;
@@ -65,13 +66,16 @@ public class ExpenseDAO extends CoreDAO implements IExpenseDAO {
 	}
 
 //	@Override
-	public String delete(String id) {
+	public void delete(String[] ids) {
 		
 		Session session = getSession();
-		ExpenseEntity expense = get(id);
-		session.delete(expense);
+//		ExpenseEntity expense = get(id);
+		Query deleteQuery = session.createQuery("delete from ExpenseEntity where id in (:ids)");
+		deleteQuery.setParameterList("ids", ids);
+		deleteQuery.executeUpdate();
+//		session.delete(expense);
 		session.flush();
-		return id;
+//		return id;
 	}
 
 	

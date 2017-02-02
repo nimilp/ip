@@ -10,6 +10,6 @@ public interface IExpenseDAO {
 	List<ExpenseEntity> list();
 	ExpenseEntity get(String id);
 	String update(ExpenseEntity expense);
-	String delete(String id);
+	void delete(String[] id);
 	
 }

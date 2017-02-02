@@ -9,6 +9,6 @@ public interface IExpenseManager {
 	List<Expense> list();
 	String create(Expense expense);
 	String update();
-	String delete();
+	void delete(String[] ids);
 	Expense get(String id);
 }

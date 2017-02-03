@@ -1,5 +1,6 @@
 Expense = function(settings) {
 	var current = this;
+	$('#expenseListMenu').addClass('active');
 	$("#success-alert").hide();
 	$.extend(current,{container: $('#editExpensePage')});
 	current.hideEditBox();

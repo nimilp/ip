@@ -10,8 +10,12 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.npeetha.mytask.resonse.IpResponse;
 
 //@Path("whatismyip")
@@ -25,14 +29,17 @@ public class MyIp {
 
 //	@ApiOperation(value = "get my current ip stored", notes = "This api is used to get the current external ip sent from my machine")
 //	@ApiResponses(value = { @ApiResponse(code = 200, response = IpResponse.class, message = "Success") })
-	@RequestMapping(value="whatismyip",method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
-	public IpResponse getMyIp() {
-		return response;
+	
+	@RequestMapping(value="/whatismyip",method=RequestMethod.GET)
+	public ModelAndView getMyIp() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		ModelAndView maV = new ModelAndView("whatismyip", "whatismyip", mapper.writeValueAsString(response));
+		return maV;
 	}
 
 //	@ApiOperation(value = "stores the ip of the client", notes = "If you access this url, then your ip is stored")
 //	@ApiResponses(value = { @ApiResponse(code = 200, message = "SUCCESSFUL") })
-	@RequestMapping(value="whatismyip",method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON)
+	@RequestMapping(value="whatismyip",method=RequestMethod.POST)
 	public String setMyIp(@Context HttpServletRequest request) {
 
 		if (response.getIpAddress() == null || !response.getIpAddress().equals(request.getRemoteAddr())) {

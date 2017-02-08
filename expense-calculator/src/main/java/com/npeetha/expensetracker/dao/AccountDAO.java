@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -69,13 +70,13 @@ public class AccountDAO extends CoreDAO implements IAccountDAO {
 	}
 
 //	@Override
-	public String delete(String id) {
+	public void deleteAccounts(String[] id) {
 		
 		Session session = getSession();
-		AccountEntity account = get(id);
-		session.delete(account);
-		session.flush();
-		return id;
+		Query deleteQuery = session.createQuery("delete from AccountEntity where id in (:id)");
+		deleteQuery.setParameterList("id", id);
+		deleteQuery.executeUpdate();
+		
 	}
 
 	

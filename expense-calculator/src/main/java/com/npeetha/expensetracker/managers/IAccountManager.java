@@ -10,5 +10,5 @@ public interface IAccountManager {
 	void createAccount(Account account);
 	Account getAccount(String id);
 	String updateAccount(Account account);
-	String deleteAccount(String id);
+	void deleteAccounts(String[] id);
 }

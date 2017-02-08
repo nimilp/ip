@@ -2,17 +2,13 @@ package com.npeetha.expensetracker.resources;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.Status;
-
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +24,6 @@ public class AccountsResource {
 
 	@Autowired
 	IAccountManager manager;
-//	ExpenseTrackerHDAO hdao;
 
 	@RequestMapping(value="/accounts",method=RequestMethod.GET)
 	public ModelAndView getAccounts() throws JsonProcessingException {
@@ -42,10 +37,7 @@ public class AccountsResource {
 		return manager.getAccounts();
 	}
 
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("/{id}")
-	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ModelAndView getAccount(@PathVariable String id) throws JsonProcessingException {
 		
 		String s = new ObjectMapper().writeValueAsString(manager.getAccounts());
@@ -69,27 +61,32 @@ public class AccountsResource {
 			return  "{\"error\":\"true\",\"message\":\""+e.getMessage()+"\"}";
 		}
 	}
-//
-//	@DELETE
-	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
-	public @ResponseBody void delete(@PathVariable String id) {
-		
-		manager.deleteAccount(id);
-	}
-//
-//	@PUT
-	@RequestMapping( method=RequestMethod.PUT)
-	public String update(@RequestBody Account account) {
-		
-		try {
-			manager.updateAccount(account);
-			return "{\"success\":\"true\"}";
-		} catch (Exception e) {
+
+	@ResponseBody
+	@RequestMapping(value="/deleteaccounts", method = RequestMethod.POST)
+	public String deleteExpense( @RequestParam(value="id[]") String[] id){
+		String returnString = "{\"success\":\"true\"}";
+		try{
+			manager.deleteAccounts(id);
+		}catch(Exception e){
 			e.printStackTrace();
-			return "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
+			returnString = "{\"error\":\"true\",\"message\":\""+e.getMessage()+"\"}";
 		}
-		
+		return returnString;
 	}
+
+//	@RequestMapping( method=RequestMethod.PUT)
+//	public String update(@RequestBody Account account) {
+//		
+//		try {
+//			manager.updateAccount(account);
+//			return "{\"success\":\"true\"}";
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
+//		}
+//		
+//	}
 	
 //	@RequestMapping(value="/generate")
 //	public String generate(){

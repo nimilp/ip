@@ -57,9 +57,9 @@ public class AccountManager implements IAccountManager {
 
 	@Override
 	@Transactional
-	public String deleteAccount(String id) {
+	public void deleteAccounts(String[] id) {
 		// TODO Auto-generated method stub
-		return accountDao.delete(id);
+		 accountDao.deleteAccounts(id);
 	}
 	
 	

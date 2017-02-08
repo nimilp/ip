@@ -10,9 +10,9 @@
 				<!-- Action <span class="caret"></span> -->
 			</i>
 			<ul class="dropdown-menu">
-				<li><a id="newExpense" href="#">New Account</a></li>
+				<li><a id="newAccount" href="#">New Account</a></li>
 				<li role="separator" class="divider"></li>
-				<li><a id="deleteExpense" href="#">Delete Account</a></li>
+				<li><a id="deleteAccount" href="#">Delete Account</a></li>
 			</ul>
 		</div>
 		<!-- <button id="newExpense" class="btn brn-default btn-primary pull-right">New
@@ -46,18 +46,21 @@
 		</table>
 	</div>
 </div>
-<div id="editAccountsPage" class="panel panel-info" style="display:none">
+<div id="editAccountsPage" class="panel panel-info"
+	style="display: none">
 	<div class="panel-heading">
-		Edit Account<i class="fa fa-times-circle-o fa-2x"
-			style="float: right" aria-hidden="true"></i>
+		Edit Account<i class="fa fa-times-circle-o fa-2x" style="float: right"
+			aria-hidden="true"></i>
 	</div>
 	<div class="panel-body">
 		<form class="form-horizontal">
 			<div id="nameDiv" class="form-group">
-				<label for="name" class="col-sm-2 control-label">Item</label>
+				<label for="name" class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-2">
 					<input type="text" placeholder="Enter Name" class="form-control"
-						id="name"> <input type="hidden" id="accountId" />
+						id="name"> <input type="hidden" id="accountId" /><input
+						type="hidden" id="updateDate" /><input type="hidden"
+						id="createDate" />
 				</div>
 			</div>
 			<div class="form-group" id="budgetDiv">
@@ -76,51 +79,18 @@
 						placeholder="Description"></textarea>
 				</div>
 			</div>
-			<!-- <div class="form-group" id="accountDiv">
-				<label for="account" class="col-sm-2 control-label">Account</label>
-				<div class="col-sm-2">
-					<select id="account" class="form-control">
-						<option value="-1">Select an account</option>
-					</select>
-				</div>
-			</div> -->
-			<!-- <div class="form-group" id="dateDiv">
-				<label for="date" class="col-sm-2 control-label">Date</label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control" id="date"
-						placeholder="Date">
-				</div>
-			</div> -->
-			<!-- <div class="form-group">
-
-					<div class="col-sm-2"> -->
 			<button type="button" class="btn brn-default btn-primary" id="save">Save
 				Account</button>
 			<button type="button" class="btn brn-default" id="cancel">Cancel</button>
-			<!-- </div>
-				</div> -->
+
 		</form>
 	</div>
 </div>
 <script>
 	$(document).ready(function() {
-		var a = ${accounts}
-		console.log(a)
+		
 		var account = new Accounts();
-		account.bindAccountsList(a);
-		;//[{id:"956a347c-0da3-497e-b831-31a83626058a", name:"abcabcb", desc:"asdasda", budget:"24.0", lastUpdatedBy:null, _id:"15"}];
-		/* $('#myTable').DataTable({
-			data : a,
-			responsive : true,
-			columns : [ {
-				"data" : "name"
-			}, {
-				"data" : "description"
-			}, {
-				"data" : "budget"
-			}, {
-				"data" : "lastUpdatedBy"
-			} ]
-		}); */
+		account.bindAccountsList(${accounts});
+		
 	});
 </script>

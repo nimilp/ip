@@ -14,13 +14,10 @@ public class Account {
 	private String id;
 	private String name;
 	private String description;
-
 	
 	private Date creationDate;
-
 	
 	private Date updateDate;
-
 	
 	private String lastUpdatedBy;
 
@@ -113,7 +110,7 @@ public class Account {
 		this.updateDate = updateDate;
 		return this;
 	}
-
+	@JsonIgnore
 	public String getLastUpdatedBy() {
 		return lastUpdatedBy;
 	}

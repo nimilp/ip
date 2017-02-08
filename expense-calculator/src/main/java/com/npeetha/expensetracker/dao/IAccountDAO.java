@@ -10,6 +10,6 @@ public interface IAccountDAO {
 	List<AccountEntity> list();
 	AccountEntity get(String id);
 	String update(AccountEntity account);
-	String delete(String id);
+	void deleteAccounts(String[] id);
 	
 }

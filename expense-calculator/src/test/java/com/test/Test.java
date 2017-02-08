@@ -41,7 +41,7 @@ public class Test {
 		 a = userManager.getAccount(id);
 		 System.out.println("User retried"+a.toString());
 		 
-		 userManager.deleteAccount(id);
+//		 userManager.deleteAccount(id);
 		 System.out.println("User deleted!"+ id);
 		 users = userManager.getAccounts();
 		System.out.println("\nUser list fetched!" + "\nUser count: " + users.size());

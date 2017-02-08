@@ -7,7 +7,7 @@ import com.npeetha.expensetracker.bo.Account;
 public interface IAccountManager {
 
 	List<Account> getAccounts();
-	String createAccount(Account account);
+	void createAccount(Account account);
 	Account getAccount(String id);
 	String updateAccount(Account account);
 	String deleteAccount(String id);

@@ -9,11 +9,11 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index">My Applications</a>
+			<a class="navbar-brand" href="/myapps/">My Applications</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
+		<div id="mainMenuDiv" class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="#">Account </a></li>
@@ -26,7 +26,7 @@
 								List</a></li>
 						<li><a href="#">New Expense</a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="/myapps/accounts">Account List</a></li>
+						<li id="accountListMenu"><a href="/myapps/expensetracker/accounts">Account List</a></li>
 						<li><a href="#">New Account</a></li>
 					</ul></li>
 			</ul>

@@ -2,6 +2,7 @@ package com.npeetha.expensetracker.bo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -93,6 +94,7 @@ public class Account {
 		// return super.toString();
 	}
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone="EST")
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -102,6 +104,7 @@ public class Account {
 		return this;
 	}
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone="EST")
 	public Date getUpdateDate() {
 		return updateDate;
 	}

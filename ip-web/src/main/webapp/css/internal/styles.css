@@ -19,3 +19,7 @@ i.fa-times-circle-o:hover{
 	left:30%;
 	
 }
+
+#expenseMenuBar {
+	cursor: pointer;
+}

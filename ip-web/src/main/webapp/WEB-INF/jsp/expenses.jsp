@@ -6,7 +6,7 @@
 		<i class="fa"></i>
 		<!-- Single button -->
 		<div class="btn-group">
-		  <i class="fa fa-bars fa-1x dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <i id="expenseMenuBar" class="fa fa-bars fa-1x dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <!-- Action <span class="caret"></span> -->
 		  </i>
 		  <ul class="dropdown-menu">

@@ -15,9 +15,11 @@ Expense.prototype.bindButtonEvents = function(){
 	});
 	current.container.find('#cancel').on('click', function(){current.hideEditBox()});
 	$('#save').off().on('click', function(){current.saveExpense()});
-	$('#newExpense').off().on('click', function(){
+	var newExpense = $('#newExpense')
+	newExpense.off().on('click', function(){
 		current.newExpenseForm();
 	});
+	
 	$('#deleteExpense').off().on('click', function(){
 		var ids = [];
 		var checked = $('input[data-autoid]:checked');
@@ -140,7 +142,7 @@ Expense.prototype.loadAccounts = function(selector){
 		mySelector = selector
 	}
 	$.ajax({
-		url:MyUtil.Server_Context()+'/myapps/accounts/list',
+		url:MyUtil.Server_Context()+'/myapps/expensetracker/accounts/list',
 		async:false,
 		success: function(data){
 			var accounts = $(mySelector);

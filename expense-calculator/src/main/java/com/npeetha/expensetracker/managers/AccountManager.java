@@ -31,11 +31,11 @@ public class AccountManager implements IAccountManager {
 
 	@Override
 	@Transactional
-	public String createAccount(Account account) {
+	public void createAccount(Account account) {
 		// TODO Auto-generated method stub
 		AccountEntity e = new AccountEntity();
 		e.copy(account);
-		return accountDao.save(e);
+		accountDao.save(e);
 		
 	}
 

@@ -6,7 +6,7 @@ import com.npeetha.expensetracker.entity.AccountEntity;
 
 public interface IAccountDAO {
 
-	String save(AccountEntity account);
+	void save(AccountEntity account);
 	List<AccountEntity> list();
 	AccountEntity get(String id);
 	String update(AccountEntity account);

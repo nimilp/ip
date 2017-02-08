@@ -8,9 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
+@RequestMapping("/")
 public class LoginResource {
 
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getExpenses() throws JsonProcessingException {
 		
 		return new ModelAndView("login", "login",null);

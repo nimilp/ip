@@ -23,20 +23,21 @@ import com.npeetha.expensetracker.bo.Account;
 import com.npeetha.expensetracker.managers.IAccountManager;
 
 @RestController
-@RequestMapping(value="accounts")
+@RequestMapping(value="/expensetracker")
 public class AccountsResource {
 
 	@Autowired
 	IAccountManager manager;
 //	ExpenseTrackerHDAO hdao;
 
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/accounts",method=RequestMethod.GET)
 	public ModelAndView getAccounts() throws JsonProcessingException {
 		
 		return new ModelAndView("accounts", "accounts", new ObjectMapper().writeValueAsString(manager.getAccounts()));
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value="/accounts/list", method=RequestMethod.GET)
 	public List<Account> listAccounts(){
 		return manager.getAccounts();
 	}
@@ -58,14 +59,14 @@ public class AccountsResource {
 		return new ModelAndView("accounts", "accounts", new ObjectMapper().writeValueAsString(manager.getAccounts()));
 	}
 
-	@RequestMapping( method=RequestMethod.POST)
-	public String insertTimes(@RequestBody Account account) {
+	@RequestMapping(value="/accounts", method=RequestMethod.POST)
+	public String createOrUpdatAccount(@RequestBody Account account) {
 		try {
 
 			manager.createAccount(account);
-			return  "{\"success\":\"true\"}";
+			return  "{\"success\":\"true\",\"id\":\""+account.getId()+"\"}";
 		} catch (Exception e) {
-			return  "{\"errorStatus\":\""+Status.INTERNAL_SERVER_ERROR+"\"}";
+			return  "{\"error\":\"true\",\"message\":\""+e.getMessage()+"\"}";
 		}
 	}
 //
@@ -90,16 +91,16 @@ public class AccountsResource {
 		
 	}
 	
-	@RequestMapping(value="/generate")
-	public String generate(){
-		for(int i =0;i<4;i++){
-			Account account = new Account();
-			account.setBudget(new Random().nextDouble());
-			account.setDescription(RandomStringUtils.randomAlphabetic(20));
-			account.setName("account"+i);
-			String s =manager.createAccount(account);
-			System.out.print("at "+i+", with "+s);
-		}
-		return "";
-	}
+//	@RequestMapping(value="/generate")
+//	public String generate(){
+//		for(int i =0;i<4;i++){
+//			Account account = new Account();
+//			account.setBudget(new Random().nextDouble());
+//			account.setDescription(RandomStringUtils.randomAlphabetic(20));
+//			account.setName("account"+i);
+//			String s =manager.createAccount(account);
+//			System.out.print("at "+i+", with "+s);
+//		}
+//		return "";
+//	}
 }

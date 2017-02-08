@@ -39,26 +39,25 @@ public class ExpenseResource {
 	@RequestMapping(value="/listexpenses.exp",method=RequestMethod.GET)
 	public List<Expense> getExpenseList() throws JsonProcessingException {
 		
-		ObjectMapper mapper = new ObjectMapper();
 		return manager.list();
 	};
 
 	
-	@RequestMapping(value="generate")
-	public String generate(){
-		String[] ids = {"072932f6-7cb3-4603-acc9-3debacd118f5","a168d88b-39ff-4654-83fb-c056cfb9c548","d42de180-0c98-43ff-ab42-e25f78f704d7","8a456c17-4aef-4390-aaac-0cfc1510c5f5"};
-		for(int i =0;i<10;i++){
-			Expense account = new Expense();
-			account.setAmount(new Random().nextDouble());
-			account.setVenue(RandomStringUtils.randomAlphabetic(20));
-			account.setItem("item"+i);
-			account.setPaidOn(new Date());
-			account.setAccountId(ids[new Random().nextInt(3)]);
-			String s =manager.create(account);
-			System.out.print("at "+i+", with "+s);
-		}
-		return "";
-	}
+//	@RequestMapping(value="generate")
+//	public String generate(){
+//		String[] ids = {"072932f6-7cb3-4603-acc9-3debacd118f5","a168d88b-39ff-4654-83fb-c056cfb9c548","d42de180-0c98-43ff-ab42-e25f78f704d7","8a456c17-4aef-4390-aaac-0cfc1510c5f5"};
+//		for(int i =0;i<10;i++){
+//			Expense account = new Expense();
+//			account.setAmount(new Random().nextDouble());
+//			account.setVenue(RandomStringUtils.randomAlphabetic(20));
+//			account.setItem("item"+i);
+//			account.setPaidOn(new Date());
+//			account.setAccountId(ids[new Random().nextInt(3)]);
+//			String s =manager.create(account);
+//			System.out.print("at "+i+", with "+s);
+//		}
+//		return "";
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value="/expense.exp",method = RequestMethod.POST)

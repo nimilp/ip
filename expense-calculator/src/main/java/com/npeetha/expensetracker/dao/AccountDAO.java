@@ -34,11 +34,13 @@ public class AccountDAO extends CoreDAO implements IAccountDAO {
 //		return session;
 //	}
 //	@Override
-	public String save(AccountEntity account) {
-		account.setId(UUID.randomUUID().toString());
+	public void save(AccountEntity account) {
+		if(account.getId() == null){
+			account.setId(UUID.randomUUID().toString());
+		}
 		Session session = getSession();
-		Serializable save = session.save(account);	
-		return save.toString();
+		session.saveOrUpdate(account);	
+//		return save.toString();
 	}
 
 //	@Override

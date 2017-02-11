@@ -1,5 +1,7 @@
 MyIP = function(whatismyip){
-	var header = $('#whatismyipHeader');
+	$('.active').removeClass('active');
+	$('#whatIsMyIpMenu').addClass('active');
+	var header = $('#whatismyip');
 	var clas = 'success';
 	if(!whatismyip.ipAddress){
 		clas='danger';
